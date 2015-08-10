@@ -1,0 +1,3 @@
+#!/bin/bash
+export PGPASSWORD="<%= pass_db_zbb %>"
+psql -h <%= db_host %> -U <%= us_zbb %> -d <%= db_zbb %> -c ""

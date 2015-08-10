@@ -1,0 +1,35 @@
+<beans
+  xmlns="http://www.springframework.org/schema/beans"
+  xmlns:amq="http://activemq.apache.org/schema/core"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+  http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd">
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"/>
+    
+    <broker xmlns="http://activemq.apache.org/schema/core"
+            useJmx="false"
+            brokerName="localhost"
+            dataDirectory="${activemq.base}/data">
+
+        <persistenceAdapter>
+            <kahaDB directory="${activemq.base}/data/kahadb"/>
+        </persistenceAdapter>
+
+        <transportConnectors>
+            <transportConnector name="stomp+nio" uri="stomp+nio://0.0.0.0:61613"/>
+            <transportConnector name="stompssl" uri="stomp+ssl://0.0.0.0:6164?needClientAuth=true"/>
+        </transportConnectors>
+
+        <plugins>
+            <simpleAuthenticationPlugin>
+                <users>
+                   <authenticationUser username="<%= user_auth %>" password="<%= pass_auth %>" groups="mcollective,everyone"/>
+                   <authenticationUser username="admin" password="secret" groups="mcollective,admins,everyone"/>
+                </users>
+            </simpleAuthenticationPlugin>
+        </plugins>
+
+    </broker>
+
+</beans>

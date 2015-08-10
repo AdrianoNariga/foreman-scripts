@@ -1,0 +1,36 @@
+port=8200
+network_interface=eth0
+
+#user=jmaggard
+
+#   + "A" for audio  (eg. media_dir=A,/home/jmaggard/Music)
+#   + "V" for video  (eg. media_dir=V,/home/jmaggard/Videos)
+#   + "P" for images (eg. media_dir=P,/home/jmaggard/Pictures)
+#   + "PV" for pictures and video (eg. media_dir=PV,/home/jmaggard/digital_camera)
+media_dir=<%= path_midias %>
+
+#merge_media_dirs=no
+
+friendly_name=<%= name_server %>
+
+#db_dir=/var/cache/minidlna
+
+log_dir=/var/log/minidlna
+log_level=general,artwork,database,inotify,scanner,metadata,http,ssdp,tivo=warn
+
+album_art_names=Cover.jpg/cover.jpg/AlbumArtSmall.jpg/albumartsmall.jpg/AlbumArt.jpg/albumart.jpg/Album.jpg/album.jpg/Folder.jpg/folder.jpg/Thumb.jpg/thumb.jpg
+
+inotify=yes
+enable_tivo=no
+strict_dlna=no
+
+#presentation_url=http://www.mylan/index.php
+notify_interval=900
+
+serial=12345678
+model_number=1
+
+#minissdpdsocket=/var/run/minissdpd.sock
+#root_container=.
+#force_sort_criteria=+upnp:class,+upnp:originalTrackNumber,+dc:title
+#max_connections=50

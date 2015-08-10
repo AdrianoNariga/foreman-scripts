@@ -1,0 +1,4 @@
+create user <%= us_zbb %> with password '<%= pass_db_zbb %>';
+create database <%= db_zbb %>;
+grant all privileges on database <%= db_zbb %> to <%= us_zbb %>;
+alter database <%= db_zbb %> owner to <%= us_zbb %>;

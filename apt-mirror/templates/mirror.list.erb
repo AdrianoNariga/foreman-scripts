@@ -1,0 +1,44 @@
+set limit_rate 900k
+set base_path    <%= path_mirror %>
+
+set mirror_path  $base_path/mirror
+set skel_path    $base_path/skel
+set var_path     $base_path/var
+set cleanscript $var_path/clean.sh
+# set defaultarch  <running host architecture>
+# set postmirror_script $var_path/postmirror.sh
+set run_postmirror 0
+set nthreads     20
+set _tilde 0
+
+### Debian
+deb http://ftp.br.debian.org/debian/ jessie main
+deb http://security.debian.org/ jessie/updates main
+deb http://ftp.br.debian.org/debian/ jessie-updates main
+deb http://apt.puppetlabs.com wheezy main
+deb http://apt.puppetlabs.com wheezy dependencies
+
+### Ubuntu
+deb http://us.archive.ubuntu.com/ubuntu/ trusty main restricted
+deb http://us.archive.ubuntu.com/ubuntu/ trusty-updates main restricted
+deb http://us.archive.ubuntu.com/ubuntu/ trusty universe
+deb http://us.archive.ubuntu.com/ubuntu/ trusty-updates universe
+deb http://us.archive.ubuntu.com/ubuntu/ trusty multiverse
+deb http://us.archive.ubuntu.com/ubuntu/ trusty-updates multiverse
+deb http://us.archive.ubuntu.com/ubuntu/ trusty-backports main restricted universe multiverse
+deb http://security.ubuntu.com/ubuntu trusty-security main restricted
+deb http://security.ubuntu.com/ubuntu trusty-security universe
+deb http://security.ubuntu.com/ubuntu trusty-security multiverse
+deb http://apt.puppetlabs.com trusty main
+deb http://apt.puppetlabs.com trusty dependencies
+
+### Debian
+clean http://ftp.br.debian.org/debian/
+clean http://security.debian.org/
+
+### Ubuntu
+clean http://us.archive.ubuntu.com/ubuntu/
+clean http://security.ubuntu.com/ubuntu
+
+### puppet
+clean http://apt.puppetlabs.com

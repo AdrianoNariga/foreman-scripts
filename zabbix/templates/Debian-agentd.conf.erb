@@ -1,0 +1,67 @@
+PidFile=/var/run/zabbix/zabbix_agentd.pid
+LogFile=/var/log/zabbix/zabbix_agentd.log
+LogFileSize=0
+### Option: SourceIP
+##       Source IP address for outgoing connections.
+##
+## Mandatory: no
+## Default:
+## SourceIP=
+#
+##       If IPv6 support is enabled then '127.0.0.1', '::127.0.0.1', '::ffff:127.0.0.1' are treated equally.
+Server=<%= zabbix_server %>
+ServerActive=<%= zabbix_server %>
+#
+## ListenPort=10050
+## ListenIP=0.0.0.0
+## StartAgents=3
+#
+Hostname=Zabbix server
+#
+## HostnameItem=system.hostname
+#
+#### Option: HostMetadata
+##       Optional parameter that defines host metadata.
+##       Host metadata is used at host auto-registration process.
+##       An agent will issue an error and not start if the value is over limit of 255 characters.
+##       If not defined, value will be acquired from HostMetadataItem.
+##
+## Mandatory: no
+## Range: 0-255 characters
+## Default:
+## HostMetadata=
+#
+#### Option: HostMetadataItem
+##       Optional parameter that defines an item used for getting host metadata.
+##       Host metadata is used at host auto-registration process.
+##       During an auto-registration request an agent will log a warning message if
+##       the value returned by specified item is over limit of 255 characters.
+##       This option is only used when HostMetadata is not defined.
+##
+## Mandatory: no
+## Default:
+## HostMetadataItem=
+#
+## RefreshActiveChecks=120
+## BufferSend=5
+## BufferSize=100
+## MaxLinesPerSecond=100
+## Timeout=3
+#
+#### Option: AllowRoot
+##       Allow the agent to run as 'root'. If disabled and the agent is started by 'root', the agent
+##       will try to switch to the user specified by the User configuration option instead.
+##       Has no effect if started under a regular user.
+##       0 - do not allow
+##       1 - allow
+##
+## Mandatory: no
+## Default:
+## AllowRoot=0
+#
+#### Option: User
+## Mandatory: no
+## Default:
+## User=zabbix
+#
+Include=/etc/zabbix/zabbix_agentd.d/

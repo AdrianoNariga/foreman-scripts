@@ -1,0 +1,2 @@
+deb http://192.168.111.5/puppet wheezy main
+deb http://192.168.111.5/puppet wheezy dependencies

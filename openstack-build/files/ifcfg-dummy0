@@ -1,0 +1,5 @@
+DEVICE=dummy0
+BOOTPROTO=none
+ONBOOT=yes
+TYPE=Ethernet
+NM_CONTROLLED=no

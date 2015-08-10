@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>Rakefile - RDoc Documentation</title>
+
+<link type="text/css" media="screen" href="../openstack-build/manifests/doc/rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../openstack-build/manifests/doc/";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="../openstack-build/manifests/doc/js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../openstack-build/manifests/doc/js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="../openstack-build/manifests/doc/js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="../openstack-build/manifests/doc/js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="../openstack-build/manifests/doc/js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="../openstack-build/manifests/doc/js/darkfish.js"></script>
+
+
+<body class="file">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="../openstack-build/manifests/doc/index.html">Home</a>
+    <a href="../openstack-build/manifests/doc/table_of_contents.html#classes">Classes</a>
+    <a href="../openstack-build/manifests/doc/table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/dns-server/Rakefile.html">Rakefile</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/grub-password/Gemfile.html">Gemfile</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/grub-password/Rakefile.html">Rakefile</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/grub-password/files/00_header.html">00_header</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/mco-amq/Gemfile.html">Gemfile</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/mco-amq/Rakefile.html">Rakefile</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/myssh-nag/Rakefile.html">Rakefile</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/myssh-nag/files/rsync.html">rsync</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/myssh-nag/files/sftp_config.html">sftp_config</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/myssh-nag/files/sshd_config.html">sshd_config</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/nginx-server/Gemfile.html">Gemfile</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/nginx-server/Rakefile.html">Rakefile</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/nginx-server/files/web2py/CHANGELOG.html">CHANGELOG</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/nginx-server/files/web2py/LICENSE.html">LICENSE</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/nginx-server/files/web2py/VERSION.html">VERSION</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/nginx-server/files/web2py/applications/admin/ABOUT.html">ABOUT</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/nginx-server/files/web2py/applications/admin/LICENSE.html">LICENSE</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/nginx-server/files/web2py/applications/admin/cron/crontab.html">crontab</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/nginx-server/files/web2py/applications/admin/static/codemirror/LICENSE.html">LICENSE</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/nginx-server/files/web2py/applications/admin/static/codemirror/bin/compress.html">compress</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/nginx-server/files/web2py/applications/admin/static/codemirror/bin/lint.html">lint</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/nginx-server/files/web2py/applications/admin/static/codemirror/bin/source-highlight.html">source-highlight</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/nginx-server/files/web2py/applications/admin/static/codemirror/mode/coffeescript/LICENSE.html">LICENSE</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/nginx-server/files/web2py/applications/admin/static/codemirror/mode/livescript/LICENSE.html">LICENSE</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/nginx-server/files/web2py/applications/admin/static/codemirror/mode/r/LICENSE.html">LICENSE</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/nginx-server/files/web2py/applications/admin/static/codemirror/mode/rst/LICENSE_txt.html">LICENSE</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/nginx-server/files/web2py/applications/admin/static/codemirror/mode/xquery/LICENSE.html">LICENSE</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/nginx-server/files/web2py/applications/examples/ABOUT.html">ABOUT</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/nginx-server/files/web2py/applications/examples/LICENSE.html">LICENSE</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/nginx-server/files/web2py/applications/examples/cron/crontab.html">crontab</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/nginx-server/files/web2py/applications/examples/languages/README.html">README</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/nginx-server/files/web2py/applications/examples/static/robots_txt.html">robots</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/nginx-server/files/web2py/applications/welcome/ABOUT.html">ABOUT</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/nginx-server/files/web2py/applications/welcome/LICENSE.html">LICENSE</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/nginx-server/files/web2py/applications/welcome/cron/crontab.html">crontab</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/nginx-server/files/web2py/examples/README.html">README</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/nginx-server/files/web2py/extras/build_web2py/README.html">README</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/nginx-server/files/web2py/gluon/contrib/markdown/LICENSE.html">LICENSE</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/nginx-server/files/web2py/gluon/contrib/memcache/ChangeLog.html">ChangeLog</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/nginx-server/files/web2py/gluon/contrib/memcache/PKG-INFO.html">PKG-INFO</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/nginx-server/files/web2py/gluon/contrib/memcache/README.html">README</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/nginx-server/files/web2py/gluon/contrib/pymysql/CHANGELOG.html">CHANGELOG</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/nginx-server/files/web2py/gluon/contrib/pymysql/LICENSE.html">LICENSE</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/nginx-server/files/web2py/gluon/contrib/pyrtf/README.html">README</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/nginx-server/files/web2py/gluon/contrib/pyuca/LICENSE.html">LICENSE</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/nginx-server/files/web2py/gluon/contrib/pyuca/allkeys_txt.html">allkeys</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/nginx-server/files/web2py/gluon/contrib/simplejson/LICENSE_txt.html">LICENSE</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/nginx-server/files/web2py/handlers/README.html">README</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/ntx-access/Gemfile.html">Gemfile</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/ntx-access/Rakefile.html">Rakefile</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/openstack-build/Gemfile.html">Gemfile</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/openstack-build/Rakefile.html">Rakefile</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/postgresql-nag/Rakefile.html">Rakefile</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/postgresql-nag/files/keypgdg-deb_asc_txt.html">keypgdg-deb.asc</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/Gemfile.html">Gemfile</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/Rakefile.html">Rakefile</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/gen-cert/Makefile.html">Makefile</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/gen-cert/build-ca.html">build-ca</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/gen-cert/build-dh.html">build-dh</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/gen-cert/build-inter.html">build-inter</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/gen-cert/build-key.html">build-key</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/gen-cert/build-key-pass.html">build-key-pass</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/gen-cert/build-key-pkcs12.html">build-key-pkcs12</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/gen-cert/build-key-server.html">build-key-server</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/gen-cert/build-req.html">build-req</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/gen-cert/build-req-pass.html">build-req-pass</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/gen-cert/clean-all.html">clean-all</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/gen-cert/inherit-inter.html">inherit-inter</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/gen-cert/keys/index_txt.html">index</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/gen-cert/keys/serial.html">serial</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/gen-cert/list-crl.html">list-crl</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/gen-cert/pkitool.html">pkitool</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/gen-cert/revoke-full.html">revoke-full</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/gen-cert/sign-req.html">sign-req</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/gen-cert/tmp/build-ca.html">build-ca</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/gen-cert/tmp/build-dh.html">build-dh</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/gen-cert/tmp/build-inter.html">build-inter</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/gen-cert/tmp/build-key.html">build-key</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/gen-cert/tmp/build-key-pass.html">build-key-pass</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/gen-cert/tmp/build-key-pkcs12.html">build-key-pkcs12</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/gen-cert/tmp/build-key-server.html">build-key-server</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/gen-cert/tmp/build-req.html">build-req</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/gen-cert/tmp/build-req-pass.html">build-req-pass</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/gen-cert/tmp/clean-all.html">clean-all</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/gen-cert/tmp/file.html">file</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/gen-cert/tmp/inherit-inter.html">inherit-inter</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/gen-cert/tmp/list-crl.html">list-crl</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/gen-cert/tmp/pkitool.html">pkitool</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/gen-cert/tmp/revoke-full.html">revoke-full</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/gen-cert/tmp/sign-req.html">sign-req</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/gen-cert/tmp/vars.html">vars</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/gen-cert/tmp/whichopensslcnf.html">whichopensslcnf</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/gen-cert/vars.html">vars</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/gen-cert/whichopensslcnf.html">whichopensslcnf</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/ntx-vpns/ccd-sites/amazon.html">amazon</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/ntx-vpns/ccd-sites/diadema.html">diadema</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/ntx-vpns/ccd-sites/ipiranga.html">ipiranga</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/ntx-vpns/sites-certs/gen-key/Makefile.html">Makefile</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/ntx-vpns/sites-certs/gen-key/build-ca.html">build-ca</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/ntx-vpns/sites-certs/gen-key/build-dh.html">build-dh</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/ntx-vpns/sites-certs/gen-key/build-inter.html">build-inter</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/ntx-vpns/sites-certs/gen-key/build-key.html">build-key</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/ntx-vpns/sites-certs/gen-key/build-key-pass.html">build-key-pass</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/ntx-vpns/sites-certs/gen-key/build-key-pkcs12.html">build-key-pkcs12</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/ntx-vpns/sites-certs/gen-key/build-key-server.html">build-key-server</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/ntx-vpns/sites-certs/gen-key/build-req.html">build-req</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/ntx-vpns/sites-certs/gen-key/build-req-pass.html">build-req-pass</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/ntx-vpns/sites-certs/gen-key/clean-all.html">clean-all</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/ntx-vpns/sites-certs/gen-key/inherit-inter.html">inherit-inter</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/ntx-vpns/sites-certs/gen-key/keys/index_txt.html">index</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/ntx-vpns/sites-certs/gen-key/keys/serial.html">serial</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/ntx-vpns/sites-certs/gen-key/list-crl.html">list-crl</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/ntx-vpns/sites-certs/gen-key/pkitool.html">pkitool</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/ntx-vpns/sites-certs/gen-key/revoke-full.html">revoke-full</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/ntx-vpns/sites-certs/gen-key/sign-req.html">sign-req</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/ntx-vpns/sites-certs/gen-key/tmp/build-ca.html">build-ca</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/ntx-vpns/sites-certs/gen-key/tmp/build-dh.html">build-dh</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/ntx-vpns/sites-certs/gen-key/tmp/build-inter.html">build-inter</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/ntx-vpns/sites-certs/gen-key/tmp/build-key.html">build-key</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/ntx-vpns/sites-certs/gen-key/tmp/build-key-pass.html">build-key-pass</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/ntx-vpns/sites-certs/gen-key/tmp/build-key-pkcs12.html">build-key-pkcs12</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/ntx-vpns/sites-certs/gen-key/tmp/build-key-server.html">build-key-server</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/ntx-vpns/sites-certs/gen-key/tmp/build-req.html">build-req</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/ntx-vpns/sites-certs/gen-key/tmp/build-req-pass.html">build-req-pass</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/ntx-vpns/sites-certs/gen-key/tmp/clean-all.html">clean-all</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/ntx-vpns/sites-certs/gen-key/tmp/file.html">file</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/ntx-vpns/sites-certs/gen-key/tmp/inherit-inter.html">inherit-inter</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/ntx-vpns/sites-certs/gen-key/tmp/list-crl.html">list-crl</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/ntx-vpns/sites-certs/gen-key/tmp/pkitool.html">pkitool</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/ntx-vpns/sites-certs/gen-key/tmp/revoke-full.html">revoke-full</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/ntx-vpns/sites-certs/gen-key/tmp/sign-req.html">sign-req</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/ntx-vpns/sites-certs/gen-key/tmp/vars.html">vars</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/ntx-vpns/sites-certs/gen-key/tmp/whichopensslcnf.html">whichopensslcnf</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/ntx-vpns/sites-certs/gen-key/vars.html">vars</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/ntx-vpns/sites-certs/gen-key/whichopensslcnf.html">whichopensslcnf</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vpn-server/files/update-resolv-conf.html">update-resolv-conf</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vsftpd-nag/Modulefile.html">Modulefile</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vsftpd-nag/README.html">README</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/vsftpd-nag/files/chroot_list.html">chroot_list</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/zabbixpg-nag/Rakefile.html">Rakefile</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/zabbixpg-nag/files/initdb-zabbix-pg.html">initdb-zabbix-pg</a>
+  
+    <li class="file"><a href="../openstack-build/manifests/doc//etc/puppet/environments/common/zabbixpg-nag/files/test-initdb.html">test-initdb</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="../openstack-build/manifests/doc/zabbixpg-nag.html">zabbixpg-nag</a>
+  
+    <li><a href="../openstack-build/manifests/doc/zabbixpg-nag/apache.html">zabbixpg-nag::apache</a>
+  
+    <li><a href="../openstack-build/manifests/doc/zabbixpg-nag/centos.html">zabbixpg-nag::centos</a>
+  
+    <li><a href="../openstack-build/manifests/doc/zabbixpg-nag/debian.html">zabbixpg-nag::debian</a>
+  
+    <li><a href="../openstack-build/manifests/doc/zabbixpg-nag/zabbix.html">zabbixpg-nag::zabbix</a>
+  
+    <li><a href="../openstack-build/manifests/doc/zabbixpg-nag/zabbixpg-nag/zabbix-centos6.html">zabbixpg-nag::zabbixpg-nag::zabbix-centos6</a>
+  
+    <li><a href="../openstack-build/manifests/doc/zabbixpg-nag/zabbixpg-nag/zabbix-centos7.html">zabbixpg-nag::zabbixpg-nag::zabbix-centos7</a>
+  
+    <li><a href="../openstack-build/manifests/doc/zabbixpg-nag/zabbixpg-nag/zabbix-centos7-mysql.html">zabbixpg-nag::zabbixpg-nag::zabbix-centos7-mysql</a>
+  
+    <li><a href="../openstack-build/manifests/doc/zabbixpg-nag/zabbixpg-nag/zabbixpg-nag.html">zabbixpg-nag::zabbixpg-nag::zabbixpg-nag</a>
+  
+    <li><a href="../openstack-build/manifests/doc/openstack-build.html">openstack-build</a>
+  
+    <li><a href="../openstack-build/manifests/doc/openstack-build/galeradb.html">openstack-build::galeradb</a>
+  
+    <li><a href="../openstack-build/manifests/doc/openstack-build/keystone.html">openstack-build::keystone</a>
+  
+    <li><a href="../openstack-build/manifests/doc/openstack-build/memcached.html">openstack-build::memcached</a>
+  
+    <li><a href="../openstack-build/manifests/doc/openstack-build/openstack-build/openstack-build.html">openstack-build::openstack-build::openstack-build</a>
+  
+    <li><a href="../openstack-build/manifests/doc/openstack-build/openstack-build/rabbitmq-server.html">openstack-build::openstack-build::rabbitmq-server</a>
+  
+    <li><a href="../openstack-build/manifests/doc/openstack-build/tenants.html">openstack-build::tenants</a>
+  
+    <li><a href="../openstack-build/manifests/doc/myssh-nag.html">myssh-nag</a>
+  
+    <li><a href="../openstack-build/manifests/doc/myssh-nag/myssh-nag/myssh-nag.html">myssh-nag::myssh-nag::myssh-nag</a>
+  
+    <li><a href="../openstack-build/manifests/doc/myssh-nag/myssh-nag/rsync-server.html">myssh-nag::myssh-nag::rsync-server</a>
+  
+    <li><a href="../openstack-build/manifests/doc/myssh-nag/myssh-nag/users-homejab.html">myssh-nag::myssh-nag::users-homejab</a>
+  
+    <li><a href="../openstack-build/manifests/doc/myssh-nag/ssh.html">myssh-nag::ssh</a>
+  
+    <li><a href="../openstack-build/manifests/doc/myssh-nag/users.html">myssh-nag::users</a>
+  
+    <li><a href="../openstack-build/manifests/doc/mco-amq.html">mco-amq</a>
+  
+    <li><a href="../openstack-build/manifests/doc/mco-amq/mco-amq/activemq-server.html">mco-amq::mco-amq::activemq-server</a>
+  
+    <li><a href="../openstack-build/manifests/doc/mco-amq/mco-amq/mco-amq.html">mco-amq::mco-amq::mco-amq</a>
+  
+    <li><a href="../openstack-build/manifests/doc/mco-amq/mco-amq/mco-client.html">mco-amq::mco-amq::mco-client</a>
+  
+    <li><a href="../openstack-build/manifests/doc/mco-amq/mco-amq/mco-server.html">mco-amq::mco-amq::mco-server</a>
+  
+    <li><a href="../openstack-build/manifests/doc/nginx-server.html">nginx-server</a>
+  
+    <li><a href="../openstack-build/manifests/doc/nginx-server/centos.html">nginx-server::centos</a>
+  
+    <li><a href="../openstack-build/manifests/doc/nginx-server/nginx-server/nginx-server.html">nginx-server::nginx-server::nginx-server</a>
+  
+    <li><a href="../openstack-build/manifests/doc/nginx-server/web2py.html">nginx-server::web2py</a>
+  
+    <li><a href="../openstack-build/manifests/doc/postgresql-nag.html">postgresql-nag</a>
+  
+    <li><a href="../openstack-build/manifests/doc/postgresql-nag/centos.html">postgresql-nag::centos</a>
+  
+    <li><a href="../openstack-build/manifests/doc/postgresql-nag/debian.html">postgresql-nag::debian</a>
+  
+    <li><a href="../openstack-build/manifests/doc/postgresql-nag/postgresql-nag/postgresql-nag.html">postgresql-nag::postgresql-nag::postgresql-nag</a>
+  
+    <li><a href="../openstack-build/manifests/doc/vpn-server.html">vpn-server</a>
+  
+    <li><a href="../openstack-build/manifests/doc/vpn-server/vpn-server/vpn-server.html">vpn-server::vpn-server::vpn-server</a>
+  
+    <li><a href="../openstack-build/manifests/doc/vpn-server/vpnsites.html">vpn-server::vpnsites</a>
+  
+    <li><a href="../openstack-build/manifests/doc/vpn-server/vpnusers.html">vpn-server::vpnusers</a>
+  
+    <li><a href="../openstack-build/manifests/doc/vsftpd-nag.html">vsftpd-nag</a>
+  
+    <li><a href="../openstack-build/manifests/doc/vsftpd-nag/server.html">vsftpd-nag::server</a>
+  
+    <li><a href="../openstack-build/manifests/doc/vsftpd-nag/vsftpd-nag/ftp-users.html">vsftpd-nag::vsftpd-nag::ftp-users</a>
+  
+    <li><a href="../openstack-build/manifests/doc/vsftpd-nag/vsftpd-nag/vsftpd-nag.html">vsftpd-nag::vsftpd-nag::vsftpd-nag</a>
+  
+    <li><a href="../openstack-build/manifests/doc/dns-server.html">dns-server</a>
+  
+    <li><a href="../openstack-build/manifests/doc/dns-server/dns-server/dns-server.html">dns-server::dns-server::dns-server</a>
+  
+    <li><a href="../openstack-build/manifests/doc/dns-server/dns-server/ntx-dns.html">dns-server::dns-server::ntx-dns</a>
+  
+    <li><a href="../openstack-build/manifests/doc/ntx-access.html">ntx-access</a>
+  
+    <li><a href="../openstack-build/manifests/doc/ntx-access/exploit.html">ntx-access::exploit</a>
+  
+    <li><a href="../openstack-build/manifests/doc/ntx-access/ntx-access/ntx-access.html">ntx-access::ntx-access::ntx-access</a>
+  
+    <li><a href="../openstack-build/manifests/doc/transmission-web.html">transmission-web</a>
+  
+    <li><a href="../openstack-build/manifests/doc/transmission-web/fedora.html">transmission-web::fedora</a>
+  
+    <li><a href="../openstack-build/manifests/doc/transmission-web/transmission-web/transmission-web.html">transmission-web::transmission-web::transmission-web</a>
+  
+    <li><a href="../openstack-build/manifests/doc/grub-password.html">grub-password</a>
+  
+    <li><a href="../openstack-build/manifests/doc/grub-password/grub-password/grub-password.html">grub-password::grub-password::grub-password</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation" class="description">
+  
+<p>require ‘rubygems’ require ‘puppetlabs_spec_helper/rake_tasks’ require
+‘puppet-lint/tasks/puppet-lint’
+PuppetLint.configuration.send(‘disable_80chars’)
+PuppetLint.configuration.ignore_paths = [“spec     .pp”, “pkg/   *.pp”]</p>
+
+<p>desc “Validate manifests, templates, and ruby files” task :validate do</p>
+
+<pre class="ruby"><span class="ruby-constant">Dir</span>[<span class="ruby-string">'manifests/   *.pp'</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">manifest</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">sh</span> <span class="ruby-node">&quot;puppet parser validate --noop #{manifest}&quot;</span>
+<span class="ruby-keyword">end</span>
+<span class="ruby-constant">Dir</span>[<span class="ruby-string">'spec/**/*.rb'</span>,<span class="ruby-string">'lib/**/*.rb'</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ruby_file</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">sh</span> <span class="ruby-node">&quot;ruby -c #{ruby_file}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">ruby_file</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/spec\/fixtures/</span>
+<span class="ruby-keyword">end</span>
+<span class="ruby-constant">Dir</span>[<span class="ruby-string">'templates/**/*.erb'</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">template</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">sh</span> <span class="ruby-node">&quot;erb -P -x -T '-' #{template} | ruby -c&quot;</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>end</p>
+
+</div>
+
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.2.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+
