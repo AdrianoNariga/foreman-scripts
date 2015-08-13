@@ -2,7 +2,9 @@ class puppet-agent {
 	$puppet_ca_server = $puppet_ca_server
 	$puppetmaster = $puppetmaster
 	if $operatingsystem == 'Debian' {
-		include puppet-agent::debian
+		if $lsbdistid != 'elementary OS' {
+			include puppet-agent::debian
+		}
 	}
 	elsif $operatingsystem == 'Ubuntu' {
 		include puppet-agent::ubuntu
