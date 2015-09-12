@@ -1,0 +1,18 @@
+<VirtualHost *:80>
+	ServerAdmin webmaster@dualtec.com.br
+	DocumentRoot /home/administrator/htdocs
+	ServerName www.dualtec.com.br
+	ServerAlias duatec.com.br
+	ServerAlias dualtec.postbox.com.br
+	ErrorLog /home/administrator/logs/www-error.log
+	CustomLog /home/administrator/logs/www-access-custom.log combined
+	ScriptAlias /cgi-bin/ /home/administrator/cgi-bin/
+	DirectoryIndex index.html index.htm index.php
+		<Directory /home/administrator/htdocs/>
+			Allowoverride All
+			Require all granted
+			Options -Indexes +ExecCGI
+			AddHandler php5-fastcgi .php
+			Action php5-fastcgi /cgi-bin/php.fastcgi
+		</Directory>
+</VirtualHost>
