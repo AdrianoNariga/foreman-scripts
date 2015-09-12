@@ -1,0 +1,56 @@
+#!/bin/bash
+# Variaveis
+BASEDIR="<%= path_mirror %>"
+
+# Verifica se o $BASEDIR existe, se não cria.
+if [[ ! -d $BASEDIR ]] ; then
+    echo "O diretorio $BASEDIR não existe, Mas Vamos cria-lo!!!!!"
+    mkdir -p $BASEDIR
+
+
+# Testa se o $BASEDIR foi criado, se sim inicia o sincronismo.
+elif [[ -e $BASEDIR ]]; then
+    cd $BASEDIR || exit
+
+    for repos in epel base; do
+        reposync -n -l -r $repos --downloadcomps --download-metadata
+        repomanage -o -c $repos | xargs rm -fv
+
+        echo "$BASEDIR/$repos/repodata/repomd.xml"
+
+        if [[ ! -f $BASEDIR/$repos/repodata/repomd.xml ]] ; then
+           echo "entrou no if removendo repodata"
+           rm -rf $BASEDIR/$repos/repodata
+           rm -rf $BASEDIR/$repos/.repodata
+           createrepo $repos -g comps.xml
+        else
+           createrepo --update $repos -g comps.xml
+        fi
+    done
+
+else
+    echo "Diretorio $BASEDIR não existe."
+fi
+
+# Realiza o sincronismo dos repositorios dentro do for.
+for repos in updates extras puppetlabs-deps puppetlabs-products centosplus; do
+    cd $BASEDIR || exit
+    reposync -n -l -r $repos
+    repomanage -o -c $repos | xargs rm -fv
+
+    if [[ ! -f $BASEDIR/$repos/repodata/repomd.xml ]] ; then
+        echo "entrou no if removendo repodata"
+        rm -rf $BASEDIR/$repos/repodata
+        rm -rf $BASEDIR/$repos/.repodata
+        createrepo $repos -g comps.xml
+     else
+        createrepo --update $repos
+     fi
+
+# Cria o diretorio repodata dos repositorios dentro declarados no for.
+    printf "\n\n==== creating repo: %-50s [%-s]\n" $BASEDIR $repos
+    pushd ${BASEDIR}/${repos} >/dev/null 2>&1
+    createrepo --update $BASEDIR
+    popd >/dev/null 2>&1
+
+done

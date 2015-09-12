@@ -1,0 +1,37 @@
+[general]
+	allowguest=no
+	udpbindaddr=0.0.0.0:5060
+	match_auth_username=yes
+	alwaysauthreject=yes
+	language=pt_BR
+	transport=udp
+
+[sip_template](!)
+	type=friend
+	qualify=yes
+	host=dynamic
+	nat=force_rport,comedia
+	context=ramais
+	disallow=all
+	allow=alaw
+	allow=ulaw
+	allow=ilbc
+	allow=gsm
+
+[2000](sip_template)
+	defaultuser=2000
+	secret=123456
+	callerid=Bill Gates <2000>
+	description=Bill
+
+[2001](sip_template)
+	defaultuser=2001
+	secret=123456
+	callerid=Steve Jobs <2001>
+	description=Steve
+
+[2002](sip_template)
+	defaultuser=2002
+	secret=123456
+	callerid=Linus Torvalds <2002>
+	description=Linus

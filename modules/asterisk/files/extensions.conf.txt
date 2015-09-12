@@ -1,0 +1,13 @@
+[general]
+	static=yes
+	writeprotect=no
+	autofallthrough=yes
+	clearglobalvars=no
+
+[globals]
+
+[ramais]
+	exten => _20XX,1,NoOp(LIGACAO INTERNA)
+	same => n,Dial(SIP/${EXTEN},20,TtKk)
+	same => n,VoiceMail(${EXTEN})
+	same => n,Hangup()
