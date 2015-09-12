@@ -1,0 +1,79 @@
+http_port 3128
+dns_nameservers 8.8.8.8 8.8.4.4
+visible_hostname <%= visible_name %>
+hosts_file /etc/hosts
+
+#### Autenticao no Windows 2008 via WINBIND
+auth_param ntlm program /usr/bin/ntlm_auth --helper-protocol=squid-2.5-ntlmssp
+auth_param ntlm children 40 startup=0 idle=1
+auth_param ntlm keep_alive on
+
+#auth_param ntlm children 30
+auth_param basic program /usr/bin/ntlm_auth --helper-protocol=squid-2.5-basic
+auth_param basic children 10
+auth_param basic realm  <%= visible_name %>
+auth_param basic credentialsttl 2 hours
+
+external_acl_type grupo_ad %LOGIN /usr/lib/squid3/ext_wbinfo_group_acl
+
+acl autenticados proxy_auth REQUIRED
+acl acesso_total external grupo_ad <%= workgroup %>+acesso_total
+acl acesso_medio external grupo_ad <%= workgroup %>+acesso_medio
+acl acesso_limitado external grupo_ad <%= workgroup %>+acesso_limitado
+
+# Definicao de ACLS
+acl lan src <%= network_access %>
+acl SSL_ports port 443
+acl Safe_ports port 22 80 8080 21 443 70 210 1025-65535 280 488 591 777
+acl CONNECT method CONNECT
+acl SQL_port port 1433
+acl my-machine src 10.0.0.4
+
+acl block_acesso_limitado url_regex -i "/etc/squid3/txt_lists/acesso_limitado"
+acl block_acesso_medio url_regex -i "/etc/squid3/txt_lists/acesso_medio"
+acl block_acesso_total url_regex -i "/etc/squid3/txt_lists/acesso_total"
+
+# Definicao de bloqueios
+http_access deny block_acesso_total
+http_access allow acesso_total
+
+http_access deny block_acesso_medio
+http_access allow acesso_medio
+
+http_access deny block_acesso_limitado
+http_access allow acesso_limitado
+
+http_access allow my-machine
+http_access allow SQL_port
+http_access deny !Safe_ports
+http_access deny CONNECT !SSL_ports
+
+#http_access allow lan
+http_access allow autenticados
+http_access allow localhost manager
+http_access deny manager
+
+http_access allow localhost
+http_access deny all
+
+# Configuracao do servico
+coredump_dir /var/spool/squid3
+
+forwarded_for off
+icp_port 3130
+
+request_header_access Referer deny all
+request_header_access X-Forwarded-For deny all
+request_header_access Via deny all
+request_header_access Cache-Control deny all
+
+refresh_pattern ^ftp:		1440	20%	10080
+refresh_pattern ^gopher:	1440	0%	1440
+refresh_pattern -i (/cgi-bin/|\?) 0	0%	0
+refresh_pattern .		0	20%	4320
+
+cache_mem 512 MB
+maximum_object_size_in_memory 20 KB
+maximum_object_size 16384 KB
+cache_swap_low 95
+cache_swap_high 98

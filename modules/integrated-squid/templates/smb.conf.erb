@@ -1,0 +1,29 @@
+[global]
+        workgroup = <%= workgroup %>
+        netbios name = <%= hostname %>
+        realm = <%= up_domaindc %>
+        password server = <%= dc_dnsname %>
+        security = ads
+        passdb backend = tdbsam
+        encrypt passwords = true
+        winbind separator = +
+        idmap uid = 10000-20000
+        idmap gid = 10000-20000
+        winbind enum users = yes
+        winbind enum groups = yes
+        winbind nested groups = yes
+        winbind refresh tickets = yes
+        template homedir = /home/%U
+        template shell = /bin/bash
+        client use spnego = yes
+        client ntlmv2 auth = yes
+        #interfaces = eth0
+
+        restrict anonymous = 2
+        domain master = no
+        local master = no
+        preferred master = no
+        os level = 0
+
+        unix charset = ISO-8859-1
+        auth methods = winbind

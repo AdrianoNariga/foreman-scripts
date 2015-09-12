@@ -1,0 +1,74 @@
+http_port <%= ipaddress %>:3128
+dns_nameservers 8.8.8.8 8.8.4.4
+visible_hostname <%= visible_name %>
+
+#Configuracao do cache
+cache_mem 512 MB
+maximum_object_size_in_memory 20 KB
+maximum_object_size 16384 KB
+cache_swap_low 95
+cache_swap_high 98
+cache_dir aufs /var/spool/squid3 5000 16 256
+
+refresh_pattern ^ftp:           1440    20%     10080
+refresh_pattern ^gopher:        1440    0%      1440
+refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
+refresh_pattern .               0       20%     4320
+
+icp_port 3130
+hosts_file /etc/hosts
+
+acl localhost src 127.0.0.1
+acl to_localhost dst 127.0.0.0/8 0.0.0.0/32
+acl SSL_ports port 443
+acl Safe_ports port 22 80 8080 21 443 70 210 1025-65535 280 488 591 777
+acl CONNECT method CONNECT
+acl SQL_port port 1433
+
+## Auteticacao ##
+auth_param ntlm program /usr/bin/ntlm_auth --diagnostics --helper-protocol=squid-2.5-ntlmssp --domain=<%= up_domaindc %>
+auth_param ntlm children 500
+auth_param ntlm keep_alive off
+acl usuarios proxy_auth REQUIRED
+
+acl my-machine src 10.0.0.4
+acl BB src 10.0.0.0/24
+
+http_access allow my-machine
+http_access allow SQL_port
+
+## Pesquisa de grupos ##
+external_acl_type grupo_ad %LOGIN /usr/lib/squid3/wbinfo_group.pl
+
+acl acesso_medio external grupo_ad BBEDITORA+acesso_medio
+acl acesso_limitado external grupo_ad BBEDITORA+acesso_limitado
+acl acesso_total external grupo_ad BBEDITORA+acesso_total
+
+## bloquios ##
+acl block_acesso_medio url_regex -i "/etc/squid3/txt_lists/acesso_medio"
+acl block_acesso_limitado url_regex -i "/etc/squid3/txt_lists/acesso_limitado"
+acl block_acesso_total url_regex -i "/etc/squid3/txt_lists/acesso_total"
+acl microsoft url_regex "/etc/squid3/txt_lists/ms-update"
+acl domain_watson dstdomain watson.microsoft.com
+acl almoco time MTWHF 11:50-13:00
+acl fimdetrampo time MTWHF 17:50-23:00
+
+http_access allow microsoft
+http_access allow domain_watson
+
+http_access deny block_acesso_total
+http_access allow acesso_total
+
+http_access deny block_acesso_medio
+http_access allow acesso_medio
+
+http_access deny block_acesso_limitado !almoco !fimdetrampo
+http_access allow acesso_limitado
+
+http_access allow manager localhost
+http_access deny manager
+http_access deny !Safe_ports
+http_access deny CONNECT !SSL_ports
+http_access allow usuarios
+http_access deny all
+
