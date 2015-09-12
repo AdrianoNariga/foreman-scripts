@@ -1,0 +1,25 @@
+main_collective = mcollective
+collectives = mcollective
+libdir = /usr/libexec/mcollective
+logger_type = console
+loglevel = warn
+
+# Plugins
+securityprovider = psk
+plugin.psk = unset
+
+connector = activemq
+plugin.activemq.pool.size = 1
+plugin.activemq.pool.1.host = <%= amq_server %>
+plugin.activemq.pool.1.port = 61614
+plugin.activemq.pool.1.user = <%= user_auth %>
+plugin.activemq.pool.1.password = <%= pass_auth %>
+plugin.activemq.pool.1.ssl = true
+plugin.activemq.pool.1.ssl.ca = /var/lib/puppet/ssl/certs/ca.pem
+plugin.activemq.pool.1.ssl.key = /var/lib/puppet/ssl/private_keys/<%= fqdn %>.pem
+plugin.activemq.pool.1.ssl.cert = /var/lib/puppet/ssl/certs/<%= fqdn %>.pem
+
+# Facts
+factsource = yaml
+plugin.yaml = /etc/mcollective/facts.yaml
+
