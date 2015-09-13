@@ -3,7 +3,7 @@ class conteiner-docker {
 		$packages = ''
 	}
 	elsif $operatingsystem == 'Ubuntu' {
-		$packages = ''
+		$packages = 'docker.io'
 	}
 	elsif $operatingsystem == 'CentOS' {
 		$packages = 'docker'
