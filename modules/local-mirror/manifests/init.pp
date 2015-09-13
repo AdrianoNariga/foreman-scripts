@@ -1,31 +1,13 @@
 class local-mirror {
-	define centos_repo($repo = $title,$repo_ip){
-		$local_repo = $repo_ip
-		file { $repo:
-			ensure => present,
-			mode => 0644,
-			owner => 'root',
-			group => 'root',
-			content => template("local-mirror/repo.erb"),
-			path => "/etc/yum.repos.d/$repo-homejab.repo",
-		}
-	}
-	define rm_repo($repo = $title){
-		file { $repo:
-			ensure => absent,
-			path => "/etc/yum.repos.d/$repo.repo",
-		}
-	}
+	$local_repo = '192.168.111.5'
 
-	define deb_repo($repo = $title,$repo_ip){
-		$local_repo = $repo_ip
-		file { 'sources.list':
-			ensure => present,
-			mode => 0644,
-			owner => 'root',
-			group => 'root',
-			content => template("local-mirror/debian.erb"),
-			path => "/etc/apt/sources.list",
-		}
+	if $operatingsystem == 'Debian' {
+		include local-mirror::client-deb
+	}
+	elsif $operatingsystem == 'Ubuntu' {
+		include local-mirror::client-deb
+	}
+	elsif $operatingsystem == 'CentOS' {
+		include local-mirror::client-rpm
 	}
 }
