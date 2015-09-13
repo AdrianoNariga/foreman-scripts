@@ -1,16 +1,26 @@
 class puppet-agent {
 	$puppet_ca_server = $puppet_ca_server
 	$puppetmaster = $puppetmaster
+	$enable_local_repo = $enable_local_repo
 	if $operatingsystem == 'Debian' {
 		if $lsbdistid != 'elementary OS' {
-			include puppet-agent::debian
+			if $enable_local_repo == 'yes'{
+				include local-mirror::client-deb
+			}
+			else { include puppet-agent::deb }
 		}
 	}
 	elsif $operatingsystem == 'Ubuntu' {
-		include puppet-agent::ubuntu
+		if $enable_local_repo == 'yes'{
+			include local-mirror::client-deb
+		}
+		else { include puppet-agent::deb }
 	}
 	elsif $operatingsystem == 'CentOS' {
-		include puppet-agent::centos
+		if $enable_local_repo == 'yes'{
+			include local-mirror::client-rpm
+		}
+		else { include puppet-agent::rpm }
 	}
 
 	package{ 'puppet':
