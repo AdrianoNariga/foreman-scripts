@@ -1,4 +1,4 @@
-class local-mirror::server inherits local-mirror{
+class local-mirror::server{
 	$path_mirror = $path_mirror
 	if $operatingsystem == 'Debian' {
 		$packages = 'apt-mirror'
