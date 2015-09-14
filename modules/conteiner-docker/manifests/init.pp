@@ -1,6 +1,6 @@
 class conteiner-docker {
 	if $operatingsystem == 'Debian' {
-		$packages = ''
+		$packages = 'docker.io'
 	}
 	elsif $operatingsystem == 'Ubuntu' {
 		$packages = 'docker.io'
