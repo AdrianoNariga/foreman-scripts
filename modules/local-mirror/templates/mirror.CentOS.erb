@@ -35,7 +35,8 @@ for repos in updates extras puppetlabs-deps puppetlabs-products centosplus zabbi
     if [[ ! -f $BASEDIR/$repos/repodata/repomd.xml ]] ; then
         rm -rf $BASEDIR/$repos/repodata
         rm -rf $BASEDIR/$repos/.repodata
-        createrepo $repos -g comps.xml
+        createrepo $repos
+#        createrepo $repos -g comps.xml
      else
         createrepo --update $repos
      fi

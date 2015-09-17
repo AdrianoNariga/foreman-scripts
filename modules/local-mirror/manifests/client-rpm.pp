@@ -22,11 +22,12 @@ class local-mirror::client-rpm inherits local-mirror {
 		  'CentOS-Sources','CentOS-Vault','epel-testing']:
 	}
 	->
-	file { '/etc/yum.repos.d/epel.repo':
+	file { ['/etc/yum.repos.d/epel.repo','/etc/yum.repos.d/zabbix.repo']:
 		ensure => absent,
 	}
 	->
-	centos_repo{ ['base','extras','updates','centosplus','epel','puppetlabs-deps','puppetlabs-products']:
+	centos_repo{ ['base','extras','updates','centosplus','epel','puppetlabs-deps',
+		      'puppetlabs-products','zabbix','zabbix-non-supported']:
 		repo_ip => $local_repo
 	}
 }

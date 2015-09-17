@@ -1,0 +1,3 @@
+class gluster-storage {
+
+}
