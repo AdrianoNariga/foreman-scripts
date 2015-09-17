@@ -19,6 +19,7 @@ deb http://http.debian.net/debian jessie-backports main
 deb http://apt.puppetlabs.com wheezy main
 deb http://apt.puppetlabs.com wheezy dependencies
 deb http://repo.zabbix.com/zabbix/2.4/debian jessie main
+deb http://download.gluster.org/pub/gluster/glusterfs/3.7/3.7.4/Debian/jessie/apt jessie main
 
 ### Ubuntu
 deb http://us.archive.ubuntu.com/ubuntu/ trusty main restricted
@@ -50,5 +51,8 @@ clean http://security.ubuntu.com/ubuntu
 clean http://apt.puppetlabs.com
 
 ### zabbix
-http://repo.zabbix.com/zabbix/2.4/debian
-http://repo.zabbix.com/zabbix/2.4/ubuntu
+clean http://repo.zabbix.com/zabbix/2.4/debian
+clean http://repo.zabbix.com/zabbix/2.4/ubuntu
+
+### glusterfs
+clean deb http://download.gluster.org/pub/gluster/glusterfs/3.7/3.7.4/Debian/jessie/apt

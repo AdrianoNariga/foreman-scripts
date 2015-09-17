@@ -1,4 +1,4 @@
-class gluster-storage {
+class gluster-storage::server {
 	$packages = ['glusterfs','glusterfs-fuse','glusterfs-server']
 
 	file { 'add-repo':

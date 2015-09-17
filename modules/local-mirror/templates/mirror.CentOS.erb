@@ -27,7 +27,7 @@ elif [[ -e $BASEDIR ]]; then
 fi
 
 # Realiza o sincronismo dos repositorios dentro do for.
-for repos in updates extras puppetlabs-deps puppetlabs-products centosplus zabbix zabbix-non-supported; do
+for repos in updates extras puppetlabs-deps puppetlabs-products centosplus zabbix zabbix-non-supported glusterfs-epel glusterfs-noarch-epel; do
     cd $BASEDIR || exit
     reposync -n -l -r $repos
     repomanage -o -c $repos | xargs rm -fv

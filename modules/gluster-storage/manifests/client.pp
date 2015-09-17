@@ -1,5 +1,5 @@
-class gluster-storage {
-	$packages = ['glusterfs','glusterfs-fuse','glusterfs-server']
+class gluster-storage::client {
+	$packages = ['glusterfs','glusterfs-fuse']
 
 	file { 'add-repo':
 		ensure => present,
@@ -12,12 +12,5 @@ class gluster-storage {
 	->
 	package{ $packages:
 		ensure => present,
-	}
-	->
-	service{ 'glusterd':
-		ensure => running,
-		enable => true,
-		hasstatus => true,
-		hasrestart => true,
 	}
 }
