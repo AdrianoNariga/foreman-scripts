@@ -17,6 +17,15 @@ class local-mirror::client-deb inherits local-mirror {
 		group => 'root'
 	}
 
+	file { 'zabbix.list':
+		ensure => present,
+		content => template("local-mirror/zabbix.$operatingsystem.erb"),
+		path => '/etc/apt/sources.list.d/zabbix.list',
+		mode => 0644,
+		owner => 'root',
+		group => 'root'
+	}
+
 	file { 'repository.deb':
 		ensure => present,
 		source => "puppet:///modules/local-mirror/$operatingsystem.deb",
