@@ -27,7 +27,8 @@ class local-mirror::client-rpm inherits local-mirror {
 	}
 	->
 	centos_repo{ ['base','extras','updates','centosplus','epel','puppetlabs-deps',
-		      'puppetlabs-products','zabbix','zabbix-non-supported']:
+		      'puppetlabs-products','zabbix','zabbix-non-supported','glusterfs-epel',
+		      'glusterfs-noarch-epel']:
 		repo_ip => $local_repo
 	}
 }

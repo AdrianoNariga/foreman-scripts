@@ -19,8 +19,12 @@ class puppet-agent {
 	elsif $operatingsystem == 'CentOS' {
 		if $enable_local_repo == 'yes'{
 			include local-mirror::client-rpm
+			require puppet-agent::fw_se-disable
 		}
-		else { include puppet-agent::rpm }
+		else {
+			include puppet-agent::rpm
+			require puppet-agent::fw_se-disable
+		}
 	}
 
 	package{ 'puppet':
