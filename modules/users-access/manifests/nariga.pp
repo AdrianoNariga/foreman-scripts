@@ -5,6 +5,7 @@ class users-access::nariga {
 	user { $usuario:
 		ensure => present,
 		gid => 'users',
+		groups => ['users','puppet'],
 		home => "/home/$usuario",
 		managehome => true,
 		uid => 1001,
