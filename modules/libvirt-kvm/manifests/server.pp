@@ -1,10 +1,16 @@
 class libvirt-kvm::server {
 	if $operatingsystem == 'Debian' {
-		$packages = ['qemu-kvm','libvirt-bin','virtinst','bridge-utils']
-		$libvirtd = 'libvirtd'
+		if $lsbdistid != 'elementary OS' {			
+			$packages = ['qemu-kvm','libvirt-bin','virtinst','bridge-utils']
+			$libvirtd = 'libvirtd'
+                }
+		else{
+			$packages = ['qemu-kvm','libvirt-bin','virtinst','bridge-utils']
+			$libvirtd = 'libvirt-bin'
+		}
 	}
 	elsif $operatingsystem == 'Ubuntu' {
-		$packages = ['qemu-kvm','libvirt-bin virtinst','bridge-utils']
+		$packages = ['qemu-kvm','libvirt-bin','virtinst','bridge-utils']
 		$libvirtd = 'libvirt-bin'
 	}
 	elsif $operatingsystem == 'CentOS' {
