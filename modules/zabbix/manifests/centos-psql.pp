@@ -6,25 +6,9 @@ class zabbix::centos-psql inherits zabbix{
 			 psql -h $db_host -U $us_zbb $db_zbb < /usr/share/doc/zabbix-server-pgsql-$zabbix_version/create/data.sql"
 
 	if $db_pass != '0' {
-		include zabbix::create-db
+		require zabbix::create-db
 	}
 
-#	file { 'repo':
-#		ensure => present,
-#		source => "puppet:///modules/zabbix/repo-$operatingsystem",
-#		path => '/root/repositorio-zabbix.rpm',
-#		mode => '0644',
-#		owner => 'root',
-#		group => 'root'
-#	}
-
-#	exec { 'install-repo-zabbix':
-#		path => '/bin:/usr/bin:/sbin:/usr/sbin',
-#		command => 'rpm -i /root/repositorio-zabbix.rpm',
-#		unless => 'yum repolist | grep "Zabbix Official"',
-#		require => File['repo']
-#	}
-#	->
 	package { $srv_zabbix_pkg:
 		ensure => present,
 		allow_virtual => true,
@@ -35,7 +19,6 @@ class zabbix::centos-psql inherits zabbix{
 		environment => "PGPASSWORD=$pass_db_zbb",
 		command => $cmd_populate,
 		unless => "psql -h $db_host -U $us_zbb $db_zbb -c \"\d\" | grep application_template",
-#		require => Exec['initdb-zabbix-pg']
 	}
 	->
 	file { 'zabbix_server.conf':

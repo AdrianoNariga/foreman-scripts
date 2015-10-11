@@ -14,7 +14,6 @@ class zabbix::apache inherits zabbix::centos-psql{
 		ensure => present,
 		allow_virtual => true,
 		notify => Service['httpd'],
-#		require => Exec['install-repo-zabbix']
 	}
 
 	package { $lib_pkgs:
