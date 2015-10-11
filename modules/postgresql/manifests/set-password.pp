@@ -1,4 +1,4 @@
-class postgresq::lset-password {
+class postgresql::set-password {
 	exec { 'change-file':
 		path => '/bin:/sbin:/usr/bin:/usr/sbin',
 		command => "echo \"local all all ident\" > /etc/postgresql/$version/main/pg_hba.conf ;
