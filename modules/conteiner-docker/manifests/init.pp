@@ -13,7 +13,7 @@ class conteiner-docker {
 		ensure => present,
 	}
 	->
-	service { 'docker':
+	service { $packages:
 		ensure => running,
 		hasstatus => true,
 		hasrestart => true,
