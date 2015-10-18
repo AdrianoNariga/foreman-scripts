@@ -1,4 +1,4 @@
-class mco-amq::activemq-enable inherits mco-amq::activemq-server {        
+class mco-amq::activemq-enable {        
 	exec { 'enable-instance':
 		path => '/bin:/usr/bin:/sbin:/usr/sbin',
 		command => 'ln -s /etc/activemq/instances-available/main /etc/activemq/instances-enabled/main',
