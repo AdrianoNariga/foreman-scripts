@@ -1,9 +1,9 @@
 class conteiner-docker {
 	if $operatingsystem == 'Debian' {
-		$packages = 'docker.io'
+		$packages = 'docker-engine'
 	}
 	elsif $operatingsystem == 'Ubuntu' {
-		$packages = 'docker.io'
+		$packages = 'docker-engine'
 	}
 	elsif $operatingsystem == 'CentOS' {
 		$packages = 'docker'
@@ -13,7 +13,7 @@ class conteiner-docker {
 		ensure => present,
 	}
 	->
-	service { $packages:
+	service { 'docker':
 		ensure => running,
 		hasstatus => true,
 		hasrestart => true,
