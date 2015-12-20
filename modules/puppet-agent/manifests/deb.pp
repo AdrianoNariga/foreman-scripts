@@ -1,4 +1,5 @@
 class puppet-agent::deb {
+	include zabbix::agent
 	file { 'sources.list':
 		ensure => present,
 		source => "puppet:///modules/puppet-agent/$operatingsystem.list",
@@ -23,6 +24,15 @@ class puppet-agent::deb {
 		owner => 'root',
 		group => 'root'
 	}
+	file { 'zabbix.list':
+                ensure => present,
+		source => "puppet:///modules/puppet-agent/zabbix.$operatingsystem",
+                path => '/etc/apt/sources.list.d/zabbix.list',
+                mode => 0644,
+                owner => 'root',
+                group => 'root',
+                require => Exec['install-repo']
+        }
 	->
 	exec { 'install-pkg':
 		path => '/bin:/usr/bin:/sbin:/usr/sbin',
@@ -32,7 +42,7 @@ class puppet-agent::deb {
 	~>
 	exec { 'apt-update':
 		path => '/bin:/usr/bin:/sbin:/usr/sbin',
-		command => 'aptitude update',
+		command => 'apt-get update',
 		subscribe => File['puppet.list','sources.list'],
 		refreshonly => true
 	}

@@ -2,21 +2,19 @@ class puppet-agent {
 	$puppet_ca_server = $puppet_ca_server
 	$puppetmaster = $puppetmaster
 	$enable_local_repo = $enable_local_repo
-	if $operatingsystem == 'Debian' {
-		if $lsbdistid != 'elementary OS' {
-			if $enable_local_repo == 'yes'{
-				include local-mirror::client-deb
-			}
-			else { include puppet-agent::deb }
-		}
-	}
-	elsif $operatingsystem == 'Ubuntu' {
+	if $operatingsystem == 'Debian' and $operatingsystemmajrelease == '8' {
 		if $enable_local_repo == 'yes'{
 			include local-mirror::client-deb
 		}
 		else { include puppet-agent::deb }
 	}
-	elsif $operatingsystem == 'CentOS' {
+	elsif $operatingsystem == 'Ubuntu' and $operatingsystemmajrelease == '14.04' {
+		if $enable_local_repo == 'yes'{
+			include local-mirror::client-deb
+		}
+		else { include puppet-agent::deb }
+	}
+	elsif $operatingsystem == 'CentOS' and $operatingsystemmajrelease == '7' {
 		if $enable_local_repo == 'yes'{
 			include local-mirror::client-rpm
 			require puppet-agent::fw_se-disable

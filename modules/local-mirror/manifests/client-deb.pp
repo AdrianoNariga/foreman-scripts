@@ -1,4 +1,5 @@
 class local-mirror::client-deb inherits local-mirror {
+	include zabbix::agent
 	file { 'sources.list':
 		ensure => present,
 		content => template("local-mirror/$operatingsystem.erb"),
@@ -23,7 +24,8 @@ class local-mirror::client-deb inherits local-mirror {
 		path => '/etc/apt/sources.list.d/zabbix.list',
 		mode => 0644,
 		owner => 'root',
-		group => 'root'
+		group => 'root',
+		require => Exec['install-repo']
 	}
 
 	file { 'repository.deb':
@@ -43,7 +45,7 @@ class local-mirror::client-deb inherits local-mirror {
 	~>
 	exec { 'apt-update':
 		path => '/bin:/usr/bin:/sbin:/usr/sbin',
-		command => 'aptitude update',
+		command => 'apt-get update',
 		subscribe => File['puppet.list','sources.list'],
 		refreshonly => true
 	}
