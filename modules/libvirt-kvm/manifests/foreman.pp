@@ -2,9 +2,14 @@ class libvirt-kvm::foreman {
 	$storage_path = $storage_path
 	$key_ssh = $foreman_key
 	$user = 'foreman'
+	if $operatingsystem == 'Debian' {
+		$group = 'libvirt'
+        } else{
+		$group = 'libvirtd'
+	}
 	user { $user:
 		ensure           => 'present',
-		gid              => 'libvirt',
+		gid              => $group,
 		home             => "/home/$user",
 		managehome => true,
 		password         => '!!',
@@ -16,7 +21,7 @@ class libvirt-kvm::foreman {
 	file{ "/home/$user":
 		ensure => directory,
 		owner => $user,
-		group => 'libvirt',
+		group => $group,
 		mode => 0750,
 	}
 	->	
