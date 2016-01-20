@@ -13,6 +13,10 @@ class mco-amq::mco-server inherits mco-amq {
 		$packages = ['mcollective','mcollective-puppet-agent','mcollective-filemgr-agent','mcollective-iptables-agent',
 			'mcollective-nettest-agent','mcollective-package-agent','mcollective-shell-agent']
 	}
+	elsif $operatingsystem == 'RedHat' {
+		$packages = ['mcollective','mcollective-puppet-agent','mcollective-filemgr-agent','mcollective-iptables-agent',
+			'mcollective-nettest-agent','mcollective-package-agent','mcollective-shell-agent']
+	}
 
 	package{ $packages:
 		ensure => present,
