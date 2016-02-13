@@ -6,7 +6,7 @@ class conteiner-docker {
 		$packages = 'docker-engine'
 	}
 	elsif $operatingsystem == 'CentOS' {
-		$packages = 'docker'
+		$packages = 'docker-engine'
 	}
 
 	package { $packages:
