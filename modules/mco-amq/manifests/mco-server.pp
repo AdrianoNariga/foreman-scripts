@@ -6,8 +6,14 @@ class mco-amq::mco-server inherits mco-amq {
 			'mcollective-nettest-agent','mcollective-package-agent','mcollective-shell-agent']
 	}
 	elsif $operatingsystem == 'Ubuntu' {
-		$packages = ['mcollective','mcollective-puppet-agent','mcollective-filemgr-agent','mcollective-iptables-agent',
+		if $operatingsystemrelease == '14.04' {
+			$packages = ['mcollective','mcollective-puppet-agent','mcollective-filemgr-agent','mcollective-iptables-agent',
 			'mcollective-nettest-agent','mcollective-package-agent','mcollective-shell-agent']
+		}
+		elsif $operatingsystemrelease == '16.04' {
+			$packages = ['mcollective','mcollective-plugins-puppetd','mcollective-plugins-filemgr',
+			'mcollective-plugins-iptables','mcollective-plugins-nettest','mcollective-plugins-package']	
+		}
 	}
 	elsif $operatingsystem == 'CentOS' {
 		$packages = ['mcollective','mcollective-puppet-agent','mcollective-filemgr-agent','mcollective-iptables-agent',
