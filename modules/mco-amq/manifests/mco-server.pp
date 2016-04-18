@@ -10,7 +10,7 @@ class mco-amq::mco-server inherits mco-amq {
 			$packages = ['mcollective','mcollective-puppet-agent','mcollective-filemgr-agent','mcollective-iptables-agent',
 			'mcollective-nettest-agent','mcollective-package-agent','mcollective-shell-agent']
 		}
-		elsif $operatingsystemrelease == '16.04' {
+		elsif $operatingsystemrelease == '15.10' or $operatingsystemrelease == '16.04' {
 			$packages = ['mcollective','mcollective-plugins-puppetd','mcollective-plugins-filemgr',
 			'mcollective-plugins-iptables','mcollective-plugins-nettest','mcollective-plugins-package']	
 		}

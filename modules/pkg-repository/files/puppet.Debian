@@ -1,0 +1,2 @@
+deb http://apt.puppetlabs.com wheezy main
+deb http://apt.puppetlabs.com wheezy dependencies

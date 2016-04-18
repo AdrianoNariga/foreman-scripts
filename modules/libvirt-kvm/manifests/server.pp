@@ -36,6 +36,7 @@ class libvirt-kvm::server {
 	}
 	~>
 	service { $libvirtd:
+		provider => "systemd",
 		ensure => running,
 		hasstatus => true,
 		hasrestart => true,
