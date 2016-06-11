@@ -1,0 +1,5 @@
+class txt-grub{
+	file{ '':
+
+	}
+}
