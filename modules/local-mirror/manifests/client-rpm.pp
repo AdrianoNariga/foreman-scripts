@@ -28,7 +28,9 @@ class local-mirror::client-rpm inherits local-mirror {
 	->
 	centos_repo{ ['base','extras','updates','centosplus','epel','puppetlabs-deps',
 		      'puppetlabs-products','zabbix','zabbix-non-supported','glusterfs-epel',
-		      'glusterfs-noarch-epel','dockerrepo']:
+		      'glusterfs-noarch-epel','dockerrepo','katello','katello-candlepin',
+		      'katello-client','katello-pulp','foreman','foreman-plugins',
+		      'rhscl-rh-ror41-epel-7-x86_64','rhscl-rh-ruby22-epel-7-x86_64','rhscl-v8314-epel-7-x86_64']:
 		repo_ip => $local_repo
 	}
 }
