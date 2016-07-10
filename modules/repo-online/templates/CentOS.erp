@@ -1,0 +1,5 @@
+[<%= repo %>]
+name=<%= repo %>
+baseurl=<%= base_url %>
+gpgcheck=0
+enabled=1

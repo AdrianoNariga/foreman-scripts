@@ -1,5 +1,0 @@
-[<%= repo %>-homejab]
-name=<%= label %> [REPO LOCAL]
-baseurl=http://<%= local_repo %>/rhel/<%= _path %>
-gpgcheck=0
-enabled=1
