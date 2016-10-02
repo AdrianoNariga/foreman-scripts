@@ -1,10 +1,11 @@
 #!/bin/bash
-echo "deb http://deb.theforeman.org/ trusty 1.13" > /etc/apt/sources.list.d/foreman.list
-echo "deb http://deb.theforeman.org/ plugins 1.13" >> /etc/apt/sources.list.d/foreman.list
-echo "APT::Get::Assume-Yes \"true\";" >> /etc/apt/apt.conf.d/90forceyes
-echo "APT::Get::force-yes \"true\";" >> /etc/apt/apt.conf.d/90forceyes
+echo "deb http://deb.theforeman.org/ trusty 1.12" > /etc/apt/sources.list.d/foreman.list
+echo "deb http://deb.theforeman.org/ plugins 1.12" >> /etc/apt/sources.list.d/foreman.list
 apt-get update
-apt-get --assume-yes --only-upgrade install ruby\* foreman\* -y
+export DEBIAN_FRONTEND=noninteractive
+apt-get -qq -o Dpkg::Options::="--force-confdef" \
+    -o Dpkg::Options::="--force-confold" \
+    --assume-yes --only-upgrade install ruby\* foreman\* -y
 foreman-rake db:migrate
 foreman-rake db:seed
 foreman-rake tmp:cache:clear
