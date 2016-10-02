@@ -1,6 +1,8 @@
 #!/bin/bash
 echo "deb http://deb.theforeman.org/ trusty 1.13" > /etc/apt/sources.list.d/foreman.list
 echo "deb http://deb.theforeman.org/ plugins 1.13" >> /etc/apt/sources.list.d/foreman.list
+echo "APT::Get::Assume-Yes \"true\";" >> /etc/apt/apt.conf.d/90forceyes
+echo "APT::Get::force-yes \"true\";" >> /etc/apt/apt.conf.d/90forceyes
 apt-get update
 apt-get --assume-yes --only-upgrade install ruby\* foreman\* -y
 foreman-rake db:migrate
