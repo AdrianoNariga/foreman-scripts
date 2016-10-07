@@ -1,5 +1,5 @@
 class users-access::nariga {
-	$key_ssh = $remote_execution_ssh_keys
+	$key_ssh = $nariga_ssh_keys
 	$usuario = 'nariga'
 
 	user { $usuario:

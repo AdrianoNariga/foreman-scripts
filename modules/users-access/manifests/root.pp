@@ -1,4 +1,5 @@
 class users-access::root {
+	$key_ssh = $root_key_ssh
 	user { 'root':
 		ensure => present,
 		gid => 'root',

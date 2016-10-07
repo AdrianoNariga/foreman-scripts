@@ -1,5 +1,5 @@
 [<%= repo %>]
 name=<%= repo %>
-baseurl=http://<%= local_repo %>/rhel/<%= _path %>
+baseurl=http://<%= local_repo %>/rhel/<%= local_path %>
 gpgcheck=0
 enabled=1
