@@ -1,5 +1,5 @@
 class basics-confs {
-	$packages = ['screen']
+	$packages = ['screen','vim','git']
 	package { $packages:
 		ensure => present,
 	}
