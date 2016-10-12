@@ -1,5 +1,5 @@
 class basics-confs {
-	$packages = ['screen','vim','git']
+	$packages = ['screen','git','vim-enhanced']
 	package { $packages:
 		ensure => present,
 	}
