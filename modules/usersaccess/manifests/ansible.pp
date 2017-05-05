@@ -1,4 +1,4 @@
-class users-access::ansible {
+class usersaccess::ansible {
 	$key_ssh = $key_ssh
 	$usuario = 'ansible'
 

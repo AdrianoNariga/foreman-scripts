@@ -1,4 +1,4 @@
-class users-access::root {
+class usersaccess::root {
 	$key_ssh = $root_key_ssh
 	user { 'root':
 		ensure => present,
