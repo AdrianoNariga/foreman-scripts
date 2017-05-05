@@ -1,4 +1,4 @@
-class users-access::nariga {
+class usersaccess::nariga {
 	$key_ssh = $nariga_ssh_keys
 	$usuario = 'nariga'
 
@@ -28,16 +28,16 @@ class users-access::nariga {
 		ensure => directory,
 		owner => $usuario,
 		group => 'users',
-		mode => '0700',
+		mode => 0700,
 		require => File["/home/$usuario"]
 	}
 
 	file{ "/home/$usuario/.screenrc":
 		ensure => present,
 		owner => $usuario,
-		source => 'puppet:///modules/users-access/screenrc',
+		source => 'puppet:///modules/usersaccess/screenrc',
 		group => 'users',
-		mode => '0644',
+		mode => 0644,
 		require => File["/home/$usuario"]
 	}
 
@@ -46,7 +46,7 @@ class users-access::nariga {
 		content => $key_ssh,
 		owner => $usuario,
 		group => 'users',
-		mode => '0644',
+		mode => 0644,
 		require => File["/home/$usuario/.ssh"]
 	}
 
@@ -55,6 +55,6 @@ class users-access::nariga {
 		content => "$usuario  ALL=(ALL) NOPASSWD:ALL",
 		owner => 'root',
 		group => 'root',
-		mode => '644'
+		mode => 0644
 	}
 }

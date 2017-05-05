@@ -1,4 +1,4 @@
-class users-access {
+class usersaccess {
 	package { 'sudo':
 		ensure => present,
 	}
