@@ -8,4 +8,8 @@ class localrepo::centos::base{
 		gpgcheck => 0,
 	}
 
+        yumrepo { 'base':
+                ensure => absent
+        }
+
 }

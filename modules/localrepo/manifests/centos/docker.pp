@@ -8,7 +8,7 @@ class localrepo::centos::docker{
                 gpgcheck => 0,
         }
 
-	yumrepo { 'dockerrepo'
+	yumrepo { 'dockerrepo':
 		ensure => absent
 	}
 

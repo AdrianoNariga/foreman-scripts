@@ -7,4 +7,8 @@ class localrepo::centos::extras{
                 baseurl  => "http://$local_repo/centos/extras",
                 gpgcheck => 0,
         }
+
+        yumrepo { 'extras':
+                ensure => absent
+        }
 }

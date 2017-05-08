@@ -8,7 +8,7 @@ class localrepo::centos::epel{
                 gpgcheck => 0,
         }
 
-        yumrepo { 'epel'
+        yumrepo { 'epel':
                 ensure => absent
         }
 }

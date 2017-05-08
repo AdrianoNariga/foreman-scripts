@@ -7,4 +7,8 @@ class localrepo::centos::updates{
                 baseurl  => "http://$local_repo/centos/updates",
                 gpgcheck => 0,
         }
+
+        yumrepo { 'updates':
+                ensure => absent
+        }
 }

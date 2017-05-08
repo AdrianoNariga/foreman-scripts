@@ -7,4 +7,8 @@ class localrepo::centos::puppet{
                 baseurl  => "http://$local_repo/centos/puppetlabs-pc1",
                 gpgcheck => 0,
         }
+
+        yumrepo { 'puppetlabs-pc1':
+                ensure => absent
+        }
 }
