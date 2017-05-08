@@ -7,4 +7,8 @@ class localrepo::centos::epel{
                 baseurl  => "http://$local_repo/centos/epel",
                 gpgcheck => 0,
         }
+
+        yumrepo { 'epel'
+                ensure => absent
+        }
 }

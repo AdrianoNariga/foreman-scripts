@@ -1,5 +1,11 @@
-class repo-offline::redhat::extras{
-        repo-offline{ 'extras':
-                local_path => 'rhel-7-server-extras-rpms',
+class localrepo::redhat::extras{
+        $local_repo = '192.168.111.251'
+
+        yumrepo { 'localextras':
+                enabled  => 1,
+                descr    => 'core packages',
+                baseurl  => "http://$local_repo/rhel/rhel-7-server-extras-rpms",
+                gpgcheck => 0,
         }
+
 }

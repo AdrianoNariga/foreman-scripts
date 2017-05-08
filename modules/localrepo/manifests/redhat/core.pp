@@ -1,5 +1,10 @@
-class repo-offline::redhat::core{
-        repo-offline{ 'core':
-                local_path => 'rhel-7-server-rpms',
+class localrepo::redhat::core{
+        $local_repo = '192.168.111.251'
+
+        yumrepo { 'localcore':
+                enabled  => 1,
+                descr    => 'core packages',
+                baseurl  => "http://$local_repo/rhel/rhel-7-server-rpms",
+                gpgcheck => 0,
         }
 }

@@ -1,5 +1,10 @@
-class repo-offline::redhat::optional{
-        repo-offline{ 'optional':
-                local_path => 'rhel-7-server-optional-rpms',
+class localrepo::redhat::optional{
+        $local_repo = '192.168.111.251'
+
+        yumrepo { 'localoptional':
+                enabled  => 1,
+                descr    => 'optional packages',
+                baseurl  => "http://$local_repo/rhel/rhel-7-server-optional-rpms",
+                gpgcheck => 0,
         }
 }

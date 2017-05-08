@@ -1,4 +1,4 @@
-class repo-offline::redhat::common{
+class localrepo::redhat::common{
         $local_repo = '192.168.111.251'
 
         yumrepo { 'localcommon':

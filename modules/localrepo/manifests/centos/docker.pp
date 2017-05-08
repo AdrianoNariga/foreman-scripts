@@ -8,4 +8,8 @@ class localrepo::centos::docker{
                 gpgcheck => 0,
         }
 
+	yumrepo { 'dockerrepo'
+		ensure => absent
+	}
+
 }

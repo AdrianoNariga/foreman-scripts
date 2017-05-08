@@ -1,5 +1,0 @@
-[<%= repo %>]
-name=<%= repo %>
-baseurl=http://<%= local_repo %>/centos/<%= local_path %>
-gpgcheck=0
-enabled=1
