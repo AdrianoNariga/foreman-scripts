@@ -1,4 +1,4 @@
-class libvirt-kvm::foreman {
+class libvirtd::foreman {
 	$storage_path = $storage_path
 	$key_ssh = $foreman_key
 	$user = 'foreman'

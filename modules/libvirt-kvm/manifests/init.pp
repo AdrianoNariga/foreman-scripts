@@ -1,3 +1,0 @@
-class libvirt-kvm {
-
-}

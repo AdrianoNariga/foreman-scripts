@@ -1,4 +1,4 @@
-class libvirt-kvm::server {
+class libvirtd::server {
 	if $operatingsystem == 'Debian' {
 		if $lsbdistid != 'elementary OS' {			
 			$packages = ['qemu-kvm','libvirt-bin','virtinst','bridge-utils']
@@ -28,7 +28,7 @@ class libvirt-kvm::server {
 	->
 	file{ 'config':
 		ensure => present,
-		source => "puppet:///modules/libvirt-kvm/libvirtd.$operatingsystem",
+		source => "puppet:///modules/libvirtd/libvirtd.$operatingsystem",
 		path => "/etc/libvirt/libvirtd.conf",
 		mode => 0644,
 		owner => 'root',

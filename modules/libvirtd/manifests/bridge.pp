@@ -1,4 +1,4 @@
-class libvirt-kvm::bridge{
+class libvirtd::bridge{
 	$bridge = $bridge_port
 	$ip = $bridge_ip
 	$mask = $bridge_mask
@@ -6,11 +6,11 @@ class libvirt-kvm::bridge{
 	$dns = $nameservers
 
 	$path = '/etc/network/interfaces'
-	require libvirt-kvm::server
+	require libvirtd::server
 
 	file { 'iface-conf':
 		ensure => present,
-		content => template("libvirt-kvm/iface.$operatingsystem.erb"),
+		content => template("libvirtd/iface.$operatingsystem.erb"),
 		path => $path,
 		mode => 0644,
 		group => 'root',
