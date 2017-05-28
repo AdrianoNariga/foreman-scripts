@@ -1,0 +1,40 @@
+#!/bin/bash
+get_so(){
+	while test -n "$1"
+	do
+	case $1 in
+		-s | --operatingsystem)
+			grep PRETTY_NAME= /etc/os-release | cut -d \" -f 2 | awk '{print $1}'
+		;;
+		-v | --version)
+			grep VERSION_ID= /etc/os-release | cut -d \" -f2
+		;;
+		*) echo "opcao invalida"
+	esac
+	shift
+	done
+}
+
+case `get_so -s` in
+	Debian|Ubuntu)
+	apt -y install qemu-kvm libvirt-bin virtinst \
+		bridge-utils libguestfs-tools virt-top
+	;;
+	CentOS)
+	yum install -y qemu-kvm libvirt virt-install \
+		bridge-utils libguestfs-tools virt-top \
+		spice-server spice-protocol
+
+	sed -i.bak 's/#listen_tls = 0/listen_tls = 0/g' /etc/libvirt/libvirtd.conf
+	sed -i.bak 's/#listen_tcp = 1/listen_tcp = 1/g' /etc/libvirt/libvirtd.conf
+	sed -i.bak 's/#unix_sock_group = "libvirt"/unix_sock_group = "libvirt"/g' /etc/libvirt/libvirtd.conf
+	sed -i.bak 's/#unix_sock_rw_perms = "0770"/unix_sock_rw_perms = "0770"/g' /etc/libvirt/libvirtd.conf
+	sed -i.bak 's/#auth_unix_rw = "none"/auth_unix_rw = "none"/g' /etc/libvirt/libvirtd.conf
+
+	systemctl enable libvirtd
+	systemctl restart libvirtd
+	;;
+esac
+
+echo "gpasswd -a nariga libvirt"
+echo "get centos image http://cloud.centos.org/centos/7/images/"
