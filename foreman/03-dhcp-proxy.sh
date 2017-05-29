@@ -25,3 +25,9 @@ foreman-installer \
   --foreman-proxy-dhcp-gateway=$gateway \
   --foreman-proxy-dhcp-range="$range" \
   --foreman-proxy-dhcp-nameservers="$dns"
+
+net=$(ip -o -4 a s $dhcp_iface | awk '{print $4}')
+ssh -t $ip_foreman "route add -net $net gw $ip_proxy"
+
+iptables -t nat -A POSTROUTING -j MASQUERADE
+sysctl -w net.ipv4.ip_forward=1
