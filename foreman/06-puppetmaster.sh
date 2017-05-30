@@ -28,12 +28,12 @@ foreman-installer \
   --no-enable-foreman-plugin-bootdisk \
   --no-enable-foreman-plugin-setup \
   --foreman-proxy-tftp=false \
-  --puppet-server-ca=true \
   --foreman-proxy-puppetca=true \
   --enable-puppet --enable-foreman-proxy \
+  --foreman-proxy-puppet=true \
   --foreman-proxy-trusted-hosts=$foreman_hostname \
   --foreman-proxy-trusted-hosts=$proxy_hostname \
-  --puppet-ca-server=$foreman_hostname \
+  --puppet-ca-server=$proxy_hostname \
   --foreman-proxy-foreman-base-url=https://$foreman_hostname \
   --foreman-proxy-oauth-consumer-key="$consumer_key" \
   --foreman-proxy-oauth-consumer-secret="$consumer_secret" \
