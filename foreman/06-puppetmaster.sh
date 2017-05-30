@@ -46,7 +46,7 @@ foreman-installer \
   --puppet-server-ca=false \
   --puppet-server-foreman-url=https://$foreman_hostname \
   --enable-foreman-proxy \
-  --foreman-proxy-puppetca=false \
+  --foreman-proxy-puppetca=true \
   --foreman-proxy-tftp=false \
   --foreman-proxy-foreman-base-url=https://$foreman_hostname \
   --foreman-proxy-trusted-hosts=$foreman_hostname \
