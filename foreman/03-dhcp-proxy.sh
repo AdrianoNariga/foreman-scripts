@@ -5,8 +5,8 @@ export proxy_hostname=dhcp.local
 export ip_proxy="$(ip -o -4 a s $(ip r s | grep default | awk '{print $5}' | head -n1) | awk '{print $4}' | cut -d \/ -f 1)"
 source gen_proxy.sh
 
-range="192.168.11.2 192.168.11.12"
-dns="192.168.11.14,8.8.8.8"
+range="192.168.11.2 192.168.11.11"
+dns="192.168.11.13,8.8.8.8"
 gateway=192.168.11.1
 dhcp_iface=eth1
 
@@ -35,5 +35,13 @@ foreman-installer \
 #ssh -t $ip_foreman "ip route add $net dev \$\(ip r s | grep default | awk \'\{print \$5\}\'\)"
 
 iptables -t nat -nL POSTROUTING | grep "MASQUERADE  all  --  0.0.0.0/0            0.0.0.0/0" ||
-  iptables -t nat -A POSTROUTING -j MASQUERADE
-sysctl -w net.ipv4.ip_forward=1
+  iptables -t nat -A POSTROUTING -j MASQUERADE &&
+    systemctl enable rc-local &&
+    {
+      chmod +x /etc/rc.d/rc.local
+      grep "iptables -t nat -A POSTROUTING -j MASQUERADE" /etc/rc.d/rc.local ||
+      echo "iptables -t nat -A POSTROUTING -j MASQUERADE" >> /etc/rc.d/rc.local
+    }
+
+sysctl -w net.ipv4.ip_forward=1 &&
+  echo "net.ipv4.ip_forward = 1" > /etc/sysctl.d/98-ip_forward.conf
