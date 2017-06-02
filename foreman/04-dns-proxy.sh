@@ -7,7 +7,7 @@ source gen_proxy.sh
 
 dns_iface=eth0
 zona_name="local"
-reverse="11.168.192"
+reverse="22.168.192"
 dns_forward="192.168.111.254"
 
 foreman-installer \
