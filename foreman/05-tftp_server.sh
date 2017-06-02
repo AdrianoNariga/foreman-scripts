@@ -1,6 +1,6 @@
 #!/bin/bash
 export foreman_hostname=foreman.local
-export ip_foreman=192.168.111.100
+export ip_foreman=192.168.111.90
 
 export proxy_hostname=tftp.local
 export ip_proxy="$(ip -o -4 a s $(ip r s | grep default | awk '{print $5}' | head -n1) | awk '{print $4}' | cut -d \/ -f 1)"

@@ -13,7 +13,7 @@ systemctl disable firewalld
 grep $foreman_hostname /etc/hosts || echo "$ip_foreman $foreman_hostname" >> /etc/hosts
 grep $proxy_hostname /etc/hosts || echo "$ip_proxy $proxy_hostname" >> /etc/hosts
 
-ls ~/.ssh/id_rsa.pub || ssh-keygen -t rsa $HOME -q -P ""
+ls ~/.ssh/id_rsa.pub || ssh-keygen -t rsa -f $HOME/.ssh/id_rsa -q -P ""
 
 cat > $HOME/.ssh/config << EOF
 Host *
