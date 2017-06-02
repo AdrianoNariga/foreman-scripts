@@ -6,6 +6,7 @@ yum install -y dos2unix foreman-installer
 
 hostnamectl set-hostname $proxy_hostname
 setenforce permissive
+sed -i.bak "s/SELINUX=enforcing/SELINUX=permissive/g" /etc/selinux/config
 systemctl stop firewalld
 systemctl disable firewalld
 
