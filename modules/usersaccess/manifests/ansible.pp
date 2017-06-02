@@ -19,7 +19,7 @@ class usersaccess::ansible {
 		ensure => directory,
 		owner => $usuario,
 		group => 'users',
-		mode => 0750,
+		mode => '0750',
 		require => User[$usuario],
 	}
 
@@ -45,6 +45,6 @@ class usersaccess::ansible {
 		content => "$usuario  ALL=(ALL) NOPASSWD:ALL",
 		owner => 'root',
 		group => 'root',
-		mode => '644'
+		mode => '0644'
 	}
 }
