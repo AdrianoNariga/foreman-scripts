@@ -28,10 +28,10 @@ do
 done
 
 prepare_instances(){
-	vms="192.168.111.137 192.168.111.138 192.168.111.139 192.168.111.140"
+	vms="192.168.111.144 192.168.111.145 192.168.111.146 192.168.111.147 192.168.111.148"
 	for i in $vms
 	do
 		ssh -t root@$i '
-		yum install vim git -y ; git clone https://github.com/narigacdo/home-jab.git ; bash /root/home-jab/foreman/set_fixed_ip.sh'
+		yum install vim git -y ; git clone https://github.com/narigacdo/home-jab.git ; bash /root/home-jab/libvirtd/set_fixed_ip.sh'
 	done
 }
