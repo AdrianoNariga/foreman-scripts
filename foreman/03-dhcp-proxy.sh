@@ -7,7 +7,7 @@ source gen_proxy.sh
 
 range="192.168.22.2 192.168.22.10"
 dns="192.168.22.13,8.8.8.8"
-gateway=192.168.11.1
+gateway=192.168.22.1
 dhcp_iface=eth1
 
 foreman-installer \
