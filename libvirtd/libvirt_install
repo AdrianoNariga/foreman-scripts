@@ -33,6 +33,8 @@ case `get_so -s` in
 
 	systemctl enable libvirtd
 	systemctl restart libvirtd
+	systemctl stop firewalld
+	systemctl disable firewalld
 	;;
 esac
 
