@@ -14,3 +14,11 @@ foreman-installer --enable-foreman-compute-libvirt --foreman-proxy-tftp=false --
 
 systemctl stop firewalld
 systemctl disable firewalld
+
+hammer template list | grep centos_finish ||
+  hammer template create --file Template_Scripts/centos_finish --type finish --name centos_finish
+
+su -c "ls /usr/share/foreman/.ssh/id_rsa.pub || ssh-keygen -t rsa -f /usr/share/foreman/.ssh/id_rsa -q -P \"\"" -s /bin/bash foreman
+
+#hammer compute-resource list | grep lenovo.libvirtd ||
+#  hammer compute-resource create --provider Libvirt --name lenovo.libvirtd --url qemu+ssh://root@192.168.111.252/system
