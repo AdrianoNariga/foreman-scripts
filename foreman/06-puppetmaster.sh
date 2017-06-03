@@ -23,3 +23,5 @@ foreman-installer \
   --foreman-proxy-trusted-hosts=$proxy_hostname \
   --foreman-proxy-oauth-consumer-key="$consumer_key"\
   --foreman-proxy-oauth-consumer-secret="$consumer_secret"
+
+git clone https://github.com/narigacdo/home-jab.git /etc/puppetlabs/code/environments/home_jab
