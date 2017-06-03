@@ -31,3 +31,18 @@ foreman-installer \
   --foreman-proxy-foreman-base-url=https://$foreman_hostname \
   --foreman-proxy-oauth-consumer-key="$consumer_key" \
   --foreman-proxy-oauth-consumer-secret="$consumer_secret"
+
+cat >> /var/named/dynamic/db.local << EOF
+dhcp.local. IN A 192.168.22.1
+tftp.local. IN A 192.168.22.13
+puppet.local. IN A 192.168.22.12
+foreman.local. IN A 192.168.111.90
+EOF
+
+#cat >> /var/named/dynamic/db.22.168.192.in-addr.arpa << EOF
+#1 PTR dhcp.local.
+#13 PTR tftp.local.
+#12 PTR puppet.local.
+#EOF
+
+systemctl restart named foreman-proxy
