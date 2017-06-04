@@ -7,7 +7,7 @@ ls /var/lib/libvirt/images/disks/$name || \
 sync
 
 virsh list --all | grep $name || \
-  virt-install -n $name -r 2048 --vcpus 1 \
+  virt-install -n $name -r 3048 --vcpus 2 \
     -w bridge=br0,model=virtio --noautoconsole --import \
     --disk path=/var/lib/libvirt/images/disks/$name,device=disk,bus=virtio \
     --graphics type=spice --os-type linux --os-variant rhl7.3
