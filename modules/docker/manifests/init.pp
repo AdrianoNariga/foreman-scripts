@@ -1,4 +1,4 @@
-class conteiner-docker {
+class docker {
 	if $operatingsystem == 'Debian' {
 		$packages = 'docker-engine'
 	}
