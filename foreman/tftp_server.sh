@@ -1,8 +1,6 @@
 #!/bin/bash
-export foreman_hostname=foreman.local
-export ip_foreman=192.168.111.90
-
-export proxy_hostname=tftp.local
+source HOSTS
+export proxy_hostname=$tftp_hostname
 export ip_proxy="$(ip -o -4 a s $(ip r s | grep default | awk '{print $5}' | head -n1) | awk '{print $4}' | cut -d \/ -f 1)"
 
 source gen_proxy.sh
@@ -24,8 +22,3 @@ foreman-installer \
   --foreman-proxy-foreman-base-url=https://$foreman_hostname \
   --foreman-proxy-oauth-consumer-key="$consumer_key" \
   --foreman-proxy-oauth-consumer-secret="$consumer_secret"
-
-#tftp_server=192.168.11.14
-#foreman-installer \
-#  --foreman-proxy-tftp=true \
-#  --foreman-proxy-tftp-servername=$tftp_server

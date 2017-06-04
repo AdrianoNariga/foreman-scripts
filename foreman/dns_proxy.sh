@@ -1,14 +1,8 @@
 #!/bin/bash
-export foreman_hostname=foreman.local
-export ip_foreman=192.168.111.90
-export proxy_hostname=dns.local
+source HOSTS
+proxy_hostname=$dns_hostname
 export ip_proxy="$(ip -o -4 a s $(ip r s | grep default | awk '{print $5}' | head -n1) | awk '{print $4}' | cut -d \/ -f 1)"
 source gen_proxy.sh
-
-dns_iface=eth0
-zona_name="local"
-reverse="22.168.192"
-dns_forward="192.168.111.254"
 
 foreman-installer \
   --no-enable-foreman \
@@ -32,13 +26,10 @@ foreman-installer \
   --foreman-proxy-oauth-consumer-key="$consumer_key" \
   --foreman-proxy-oauth-consumer-secret="$consumer_secret"
 
-dhcp_ip=192.168.22.1
-tftp_ip=192.168.22.13
-puppet_ip=192.168.22.12
 cat >> /var/named/dynamic/db.$zona_name << EOF
-dhcp.$zona_name. IN A $dhcp_ip
-tftp.$zona_name. IN A $tftp_ip
-puppet.$zona_name. IN A $puppet_ip
+$dhcp_hostname. IN A $ip1_dhcp
+$tftp_hostname. IN A $ip_tftp
+$puppet_hostname. IN A $ip_puppet
 $foreman_hostname. IN A $ip_foreman
 EOF
 

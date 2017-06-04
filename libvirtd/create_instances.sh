@@ -32,6 +32,14 @@ prepare_instances(){
 	for i in $vms
 	do
 		ssh -t root@$i '
-		yum install vim git -y ; git clone https://github.com/narigacdo/home-jab.git ; bash /root/home-jab/libvirtd/set_fixed_ip.sh'
+		yum install vim git -y ; git clone https://github.com/narigacdo/home-jab.git ; bash /root/home-jab/libvirtd/set_fixed_ip.sh ; init 0'
+	done
+}
+
+remove_instances(){
+	virsh list --all | grep running | awk '{print $2}' | while read i
+	do
+		virsh destroy $i
+		virsh undefine $i --remove-all-storage
 	done
 }

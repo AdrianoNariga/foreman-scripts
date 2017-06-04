@@ -1,5 +1,5 @@
 #!/bin/bash
-foreman_hostname=foreman.local
+source HOSTS
 ip_foreman="$(ip -o -4 a s $(ip r s | grep default | awk '{print $5}' | head -n1) | awk '{print $4}' | cut -d \/ -f 1)"
 
 hostnamectl set-hostname $foreman_hostname

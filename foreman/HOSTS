@@ -1,0 +1,24 @@
+#!/bin/bash
+export foreman_hostname=foreman.local
+export ip_foreman=192.168.111.90
+
+export dns_hostname=dns.local
+export ip_dns=192.168.22.14
+export dns_iface=eth0
+export zona_name="local"
+export reverse="22.168.192"
+export dns_forward="192.168.111.254"
+
+export tftp_hostname=tftp.local
+export ip_tftp=192.168.22.13
+
+export puppet_hostname=puppet.local
+export ip_puppet=192.168.22.12
+
+export dhcp_hostname=dhcp.local
+export ip0_dhcp=192.168.111.91
+export ip1_dhcp=192.168.22.1
+export range="192.168.22.2 192.168.22.10"
+export dns="$ip_dns,8.8.8.8"
+export gateway=$ip1_dhcp
+export dhcp_iface=eth1
