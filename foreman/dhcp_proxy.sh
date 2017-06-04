@@ -19,6 +19,7 @@ foreman-installer \
   --foreman-proxy-dhcp-gateway=$gateway \
   --foreman-proxy-dhcp-range="$range" \
   --foreman-proxy-dhcp-nameservers="$dns" \
+  --foreman-proxy-dhcp-pxeserver="$ip_tftp" \
   --foreman-proxy-trusted-hosts=$foreman_hostname \
   --foreman-proxy-trusted-hosts=$dhcp_hostname \
   --foreman-proxy-foreman-base-url=https://$foreman_hostname \
