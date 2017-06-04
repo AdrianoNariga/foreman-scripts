@@ -2,28 +2,28 @@
 name=foreman.local
 smart_proxys="dhcp.local dns.local tftp.local puppet.local"
 
-ls /var/lib/libvirt/images/disks/$name || \
-  cp /var/lib/libvirt/images/templates/centos /var/lib/libvirt/images/disks/$name
+ls /home/disks/$name || \
+  cp /var/lib/libvirt/images/templates/centos /home/disks/$name
 sync
 
 virsh list --all | grep $name || \
   virt-install -n $name -r 3048 --vcpus 2 \
     -w bridge=br0,model=virtio --noautoconsole --import \
-    --disk path=/var/lib/libvirt/images/disks/$name,device=disk,bus=virtio \
+    --disk path=/home/disks/$name,device=disk,bus=virtio \
     --graphics type=spice --os-type linux --os-variant rhl7.3
 
 
 for name in $smart_proxys
 do
 	ram=512
-	ls /var/lib/libvirt/images/disks/$name || \
-	  cp /var/lib/libvirt/images/templates/centos /var/lib/libvirt/images/disks/$name
+	ls /home/disks/$name || \
+	  cp /var/lib/libvirt/images/templates/centos /home/disks/$name
 	sync
 	
 	virsh list --all | grep $name || \
 	  virt-install -n $name -r $ram --vcpus 1 \
 	    -w bridge=br0,model=virtio --noautoconsole --import \
-	    --disk path=/var/lib/libvirt/images/disks/$name,device=disk,bus=virtio \
+	    --disk path=/home/disks/$name,device=disk,bus=virtio \
 	    --graphics type=spice --os-type linux --os-variant rhl7.3
 done
 
