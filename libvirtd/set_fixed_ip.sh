@@ -1,4 +1,7 @@
 #!/bin/bash
+# sed -i.bak "s/IPADDR=192.168.*/IPADDR=192.168.111.90/g" /etc/sysconfig/network-scripts/ifcfg-eth0
+# sed -i.bak "s/CID=24/NETMASK=255.255.255.240/g" /etc/sysconfig/network-scripts/ifcfg-eth0
+# cat /etc/sysconfig/network-scripts/ifcfg-eth0
 get_so(){
         while test -n "$1"
         do
