@@ -1,4 +1,4 @@
-class repo-online::centos::docker{
+class onlinerepo::centos::docker{
 	$repo = 'dockerrepo'
 	$base_url = 'http://yum.dockerproject.org/repo/main/centos/7/'
 	file { $repo:
@@ -6,7 +6,7 @@ class repo-online::centos::docker{
 		mode => 0644,
                 owner => 'root',
 		group => 'root',
-		content => template("repo-online/$operatingsystem.erp"),
+		content => template("onlinerepo/$operatingsystem.erp"),
 		path => "/etc/yum.repos.d/$repo.repo",
 	}
 }
