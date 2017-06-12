@@ -4,6 +4,8 @@
 service network restart
 <% end -%>
 
+<%= snippet 'remote_execution_ssh_keys' %>
+
 <% if @host.provision_method == 'image' && root_pass.present? -%>
 echo 'root:<%= root_pass -%>' | /usr/sbin/chpasswd -e
 <% end -%>
