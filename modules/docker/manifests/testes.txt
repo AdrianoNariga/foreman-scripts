@@ -1,0 +1,3 @@
+docker service create -p 80:80 --name webserver nginx
+docker service ls
+docker service ps webserver
