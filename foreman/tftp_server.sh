@@ -4,6 +4,9 @@ export proxy_hostname=$tftp_hostname
 export ip_proxy="$(ip -o -4 a s $(ip r s | grep default | awk '{print $5}' | head -n1) | awk '{print $4}' | cut -d \/ -f 1)"
 
 source gen_proxy.sh
+yum install -y centos-release-scl-rh centos-release-sc
+yum repolist
+yum install -y rh-ruby22-ruby tfm-rubygem-smart_proxy_dynflow_core rubygem-smart_proxy_remote_execution_ssh
 
 foreman-installer \
   --no-enable-foreman \
@@ -21,4 +24,5 @@ foreman-installer \
   --foreman-proxy-trusted-hosts=$proxy_hostname \
   --foreman-proxy-foreman-base-url=https://$foreman_hostname \
   --foreman-proxy-oauth-consumer-key="$consumer_key" \
-  --foreman-proxy-oauth-consumer-secret="$consumer_secret"
+  --foreman-proxy-oauth-consumer-secret="$consumer_secret" \
+  --enable-foreman-proxy-plugin-remote-execution-ssh

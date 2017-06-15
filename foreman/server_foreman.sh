@@ -10,7 +10,11 @@ yum -y install http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch
 yum -y install https://yum.theforeman.org/releases/1.15/el7/x86_64/foreman-release.rpm
 yum -y install foreman-installer
 
-foreman-installer --enable-foreman-compute-libvirt --foreman-proxy-tftp=false --foreman-proxy-puppet=false
+foreman-installer \
+	--enable-foreman-compute-libvirt \
+	--foreman-proxy-tftp=false \
+	--foreman-proxy-puppet=false \
+	--enable-foreman-plugin-remote-execution
 
 systemctl stop firewalld
 systemctl disable firewalld

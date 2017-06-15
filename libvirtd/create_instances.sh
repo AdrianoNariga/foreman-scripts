@@ -43,3 +43,11 @@ remove_instances(){
 		virsh undefine $i --remove-all-storage
 	done
 }
+
+for i in tftp.local dns.local dhcp.local
+do
+	virsh destroy $i
+	virsh setmaxmem $i 262144 --config
+	virsh setmem $i 262144 --config
+	virsh start $i
+done
