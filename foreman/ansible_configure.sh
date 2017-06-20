@@ -3,6 +3,7 @@ foreman-installer --enable-foreman-plugin-ansible
 foreman-installer --enable-foreman-proxy-plugin-ansible
 
 yum install ansible tfm-rubygem-foreman_ansible -y
+yum install python-requests
 
 mkdir -p /etc/ansible/.plugins/callback_plugins/
 wget https://raw.githubusercontent.com/theforeman/foreman_ansible/master/extras/foreman_callback.py -O \
@@ -25,3 +26,12 @@ connect_interval = 1
 [colors]
 [diff]
 EOF
+
+## foreman ou smart-proxy tem que resolver o nome
+
+mkdir -p /usr/share/foreman-proxy/.ansible
+chown foreman-proxy. /usr/share/foreman-proxy/.ansible
+mkdir /usr/share/foreman-proxy/.ssh
+chown foreman-proxy. /usr/share/foreman-proxy/.ssh
+chmod 0700 /usr/share/foreman-proxy/.ssh
+chmod 0600 /usr/share/foreman-proxy/.ssh/config

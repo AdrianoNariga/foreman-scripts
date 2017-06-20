@@ -1,0 +1,10 @@
+---
+- yum: pkg={{ item }} state=present
+  with_items:
+    - mariadb-server
+    - MySQL-python
+    - xinetd
+
+- copy: src=server.cnf dest=/etc/my.cnf.d/server.cnf mode=0644 owner=root group=root
+- service: name=mariadb enabled=yes state=restarted
+#- mysql_user: name=root host=% password={{ db_root_password }} priv=*.*:ALL,GRANT state=present
