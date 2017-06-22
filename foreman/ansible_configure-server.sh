@@ -38,6 +38,7 @@ sed -i.bak "s/'FOREMAN_SSL_VERIFY', \"1\"/'FOREMAN_SSL_VERIFY', \"\/etc\/puppetl
 
 test -d /usr/share/foreman-proxy/.ssh || mkdir /usr/share/foreman-proxy/.ssh
 test -d /usr/share/foreman-proxy/.ansible || mkdir -p /usr/share/foreman-proxy/.ansible
+ls /usr/share/foreman-proxy/.ssh/id_rsa.pub || ssh-keygen -t rsa -f /usr/share/foreman-proxy/.ssh/id_rsa -q -P ""
 chown foreman-proxy. /usr/share/foreman-proxy/.ansible
 cat > /usr/share/foreman-proxy/.ssh/config << EOF
 Host *
@@ -47,3 +48,6 @@ EOF
 chown -R foreman-proxy. /usr/share/foreman-proxy/.ssh
 chmod 0700 /usr/share/foreman-proxy/.ssh
 chmod 0600 /usr/share/foreman-proxy/.ssh/config
+
+echo "As vms criadas pelo foreman tem que ter essa chave ssh no usuario root"
+cat /usr/share/foreman-proxy/.ssh/id_rsa.pub
