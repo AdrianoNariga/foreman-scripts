@@ -36,7 +36,8 @@ foreman-installer --enable-foreman-proxy-plugin-ansible
 
 ## foreman ou smart-proxy tem que resolver o nome
 
-mkdir -p /usr/share/foreman-proxy/.ansible
+test -d /usr/share/foreman-proxy/.ssh || mkdir /usr/share/foreman-proxy/.ssh
+test -d /usr/share/foreman-proxy/.ansible || mkdir -p /usr/share/foreman-proxy/.ansible
 chown foreman-proxy. /usr/share/foreman-proxy/.ansible
 cat > /usr/share/foreman-proxy/.ssh/config << EOF
 Host *
