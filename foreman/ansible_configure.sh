@@ -1,8 +1,8 @@
 #!/bin/bash
 source HOSTS
 
-ssh -t ip_foreman 'foreman-installer --enable-foreman-plugin-ansible'
-yum install python-requests
+ssh -t $ip_foreman 'foreman-installer --enable-foreman-plugin-ansible ; systemctl restart httpd'
+yum -y install python-requests
 foreman-installer --enable-foreman-proxy-plugin-ansible
 
 # Testar
@@ -38,7 +38,6 @@ foreman-installer --enable-foreman-proxy-plugin-ansible
 
 mkdir -p /usr/share/foreman-proxy/.ansible
 chown foreman-proxy. /usr/share/foreman-proxy/.ansible
-mkdir /usr/share/foreman-proxy/.ssh
 cat > /usr/share/foreman-proxy/.ssh/config << EOF
 Host *
    StrictHostKeyChecking no
