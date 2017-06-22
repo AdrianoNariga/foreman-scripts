@@ -5,12 +5,12 @@ ssh -t $ip_foreman 'foreman-installer --enable-foreman-plugin-ansible ; systemct
 yum -y install python-requests
 foreman-installer --enable-foreman-proxy-plugin-ansible
 
-# Testar
-#file_conf="/usr/lib/pythen2.7/site-packages/ansible/plugins/callback/foreman.py"
-#sed -i "s/http:\/\/localhost:3000/https:\/\/$foreman_hostname/g" $file_conf
-#sed -i "s/\/etc\/foreman\/client_cert.pem/\/etc\/puppetlabs\/puppet\/ssl\/certs\/$foreman_hostname.pem/g" $file_conf
-#sed -i "s/\/etc\/foreman\/client_key.pem/\/etc\/puppetlabs\/puppet\/ssl\/private_keys/$foreman_hostname.pem/g" $file_conf
-#sed -i "s/\'FOREMAN_SSL_VERIFY\'\, \"1\"/\'FOREMAN_SSL_VERIFY\'\, \"\/etc\/puppetlabs\/puppet\/ssl\/certs\/ca.pem\"/g" $file_conf
+file_conf="/usr/lib/python2.7/site-packages/ansible/plugins/callback/foreman.py"
+cp $file_conf /root/foreman.py.backup
+sed -i.bak "s/http:\/\/localhost:3000/https:\/\/$foreman_hostname/g" $file_conf
+sed -i.bak "s/\/etc\/foreman\/client_cert.pem/\/etc\/puppetlabs\/puppet\/ssl\/certs\/$foreman_hostname.pem/g" $file_conf
+sed -i.bak "s/\/etc\/foreman\/client_key.pem/\/etc\/puppetlabs\/puppet\/ssl\/private_keys\/$foreman_hostname.pem/g" $file_conf
+sed -i.bak "s/'FOREMAN_SSL_VERIFY', \"1\"/'FOREMAN_SSL_VERIFY', \"\/etc\/puppetlabs\/puppet\/ssl\/certs\/ca.pem\"/g" $file_conf
 
 #mkdir -p /etc/ansible/.plugins/callback_plugins/
 #wget https://raw.githubusercontent.com/theforeman/foreman_ansible/master/extras/foreman_callback.py -O \
