@@ -19,8 +19,17 @@ foreman-installer \
 systemctl stop firewalld
 systemctl disable firewalld
 
+hammer os create --name Debian --architectures x86_64 \
+	    --family Debian --major 9 --minor 0 --release-name stretch --description "Debian 9.0.0"
+
+hammer os create --name Ubuntu --architectures x86_64 \
+	    --family Debian --major 16 --minor 04.2 --release-name xenial --description "Ubuntu 16.04.2 LTS"
+
 hammer template list | grep centos_finish ||
   hammer template create --file Template_Scripts/centos_finish --type finish --name centos_finish
+
+hammer template list | grep debian9_finish ||
+  hammer template create --file Template_Scripts/debian9_finish --type finish --name debian9_finish
 
 su -c "ls /usr/share/foreman/.ssh/id_rsa.pub || ssh-keygen -t rsa -f /usr/share/foreman/.ssh/id_rsa -q -P \"\"" -s /bin/bash foreman
 
