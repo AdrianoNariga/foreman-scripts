@@ -12,28 +12,6 @@ sed -i.bak "s/\/etc\/foreman\/client_cert.pem/\/etc\/puppetlabs\/puppet\/ssl\/ce
 sed -i.bak "s/\/etc\/foreman\/client_key.pem/\/etc\/puppetlabs\/puppet\/ssl\/private_keys\/$foreman_hostname.pem/g" $file_conf
 sed -i.bak "s/'FOREMAN_SSL_VERIFY', \"1\"/'FOREMAN_SSL_VERIFY', \"\/etc\/puppetlabs\/puppet\/ssl\/certs\/ca.pem\"/g" $file_conf
 
-#mkdir -p /etc/ansible/.plugins/callback_plugins/
-#wget https://raw.githubusercontent.com/theforeman/foreman_ansible/master/extras/foreman_callback.py -O \
-#  /etc/ansible/.plugins/callback_plugins/foreman_callback.py
-#
-#cat > /etc/ansible/ansible.cfg <<EOF
-#[defaults]
-#callback_whitelist = foreman
-#callback_plugins = /etc/ansible/.plugins/callback_plugins/
-#bin_ansible_callbacks = True
-#[privilege_escalation]
-#[paramiko_connection]
-#[ssh_connection]
-#[persistent_connection]
-#connect_timeout = 30
-#connect_retries = 30
-#connect_interval = 1
-#[accelerate]
-#[selinux]
-#[colors]
-#[diff]
-#EOF
-
 ## foreman ou smart-proxy tem que resolver o nome
 
 test -d /usr/share/foreman-proxy/.ssh || mkdir /usr/share/foreman-proxy/.ssh
