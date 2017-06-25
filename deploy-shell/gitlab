@@ -1,0 +1,6 @@
+#!/bin/bash
+DEBIAN_FRONTEND=noninteractive apt-get install curl openssh-server ca-certificates postfix -y
+curl -sS https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh > /root/script.deb.sh
+bash -x /root/script.deb.sh
+apt-get install gitlab-ce -y
+gitlab-ctl reconfigure
