@@ -16,7 +16,7 @@ sed -i.bak "s/'FOREMAN_SSL_VERIFY', \"1\"/'FOREMAN_SSL_VERIFY', \"\/etc\/puppetl
 
 test -d /usr/share/foreman-proxy/.ssh || mkdir /usr/share/foreman-proxy/.ssh
 test -d /usr/share/foreman-proxy/.ansible || mkdir -p /usr/share/foreman-proxy/.ansible
-ls /usr/share/foreman-proxy/.ssh/id_rsa.pub || ssh-keygen -t rsa -f /usr/share/foreman-proxy/.ssh/id_rsa -q -P ""
+test -f /usr/share/foreman-proxy/.ssh/id_rsa.pub || ssh-keygen -t rsa -f /usr/share/foreman-proxy/.ssh/id_rsa -q -P ""
 chown foreman-proxy. /usr/share/foreman-proxy/.ansible
 cat > /usr/share/foreman-proxy/.ssh/config << EOF
 Host *
