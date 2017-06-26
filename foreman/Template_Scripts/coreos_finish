@@ -1,0 +1,5 @@
+#!/bin/bash
+hostnamectl set-hostname <%= @host.certname %>
+sed -i "s/$HOSTNAME/<%= @host.certname %>/g" /var/lib/coreos-install/user_data
+systemctl enable docker.service
+systemctl start docker.service
