@@ -33,6 +33,15 @@ hammer template list | grep coreos_finish ||
   hammer template create --file Template_Scripts/coreos_finish --type finish --name coreos_finish
 
 su -c "ls /usr/share/foreman/.ssh/id_rsa.pub || ssh-keygen -t rsa -f /usr/share/foreman/.ssh/id_rsa -q -P \"\"" -s /bin/bash foreman
+cat > /usr/share/foreman/.ssh/config << EOF
+Host *
+   StrictHostKeyChecking no
+   UserKnownHostsFile=/dev/null
+EOF
+chown -R foreman. /usr/share/foreman/.ssh
+chmod 0700 /usr/share/foreman/.ssh
+chmod 0600 /usr/share/foreman/.ssh/config
+
 su -c "ssh-copy-id $libvirt_user@$libvirt_host" -s /bin/bash foreman
 
 hammer compute-resource list | grep $libvirt_host ||
