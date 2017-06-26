@@ -5,10 +5,8 @@ ip_foreman="$(ip -o -4 a s $(ip r s | grep default | awk '{print $5}' | head -n1
 hostnamectl set-hostname $foreman_hostname
 
 grep $foreman_hostname /etc/hosts || echo "$ip_foreman $foreman_hostname" >> /etc/hosts
-yum -y install https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
-yum -y install http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-yum -y install https://yum.theforeman.org/releases/1.15/el7/x86_64/foreman-release.rpm
-yum -y install foreman-installer
+
+source shell-functions/installer-repo.sh
 
 foreman-installer \
 	--enable-foreman-compute-libvirt \
@@ -25,9 +23,6 @@ hammer os create --name Debian --architectures x86_64 \
 hammer os create --name CoreOS --architectures x86_64 \
 	    --family CoreOS --major 1437 --minor 2.0 --description "CoreOS Beta 1437"
 
-#hammer os create --name Ubuntu --architectures x86_64 \
-#	    --family Debian --major 16 --minor 04.2 --release-name xenial --description "Ubuntu 16.04.2 LTS"
-
 hammer template list | grep centos_finish ||
   hammer template create --file Template_Scripts/centos_finish --type finish --name centos_finish
 
@@ -38,6 +33,7 @@ hammer template list | grep coreos_finish ||
   hammer template create --file Template_Scripts/coreos_finish --type finish --name coreos_finish
 
 su -c "ls /usr/share/foreman/.ssh/id_rsa.pub || ssh-keygen -t rsa -f /usr/share/foreman/.ssh/id_rsa -q -P \"\"" -s /bin/bash foreman
+su -c "ssh-copy-id $libvirt_user@$libvirt_host" -s /bin/bash foreman
 
-#hammer compute-resource list | grep lenovo.libvirtd ||
-#  hammer compute-resource create --provider Libvirt --name lenovo.libvirtd --url qemu+ssh://root@192.168.111.252/system
+hammer compute-resource list | grep $libvirt_host ||
+  hammer compute-resource create --provider Libvirt --name $libvirt_host --url qemu+ssh://$libvirt_user@$libvirt_host/system

@@ -1,17 +1,4 @@
 #!/bin/bash
-ls ~/.ssh/id_rsa.pub || ssh-keygen -t rsa -f $HOME/.ssh/id_rsa -q -P ""
-
-cat > $HOME/.ssh/config << EOF
-Host *
-   StrictHostKeyChecking no
-   UserKnownHostsFile=/dev/null
-EOF
-ssh-copy-id root@$ip_foreman
-
-yum -y install https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
-yum -y install http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-yum -y install https://yum.theforeman.org/releases/1.15/el7/x86_64/foreman-release.rpm
-yum install -y dos2unix foreman-installer
 
 hostnamectl set-hostname $proxy_hostname
 setenforce permissive

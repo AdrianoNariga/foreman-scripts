@@ -1,0 +1,15 @@
+get_so(){
+	while test -n "$1"
+	do
+	case $1 in
+		-s | --operatingsystem)
+			grep PRETTY_NAME= /etc/os-release | cut -d \" -f 2 | awk '{print $1}'
+		;;
+		-v | --version)
+			grep VERSION_ID= /etc/os-release | cut -d \" -f2
+		;;
+		*) echo "opcao invalida"
+	esac
+	shift
+	done
+}

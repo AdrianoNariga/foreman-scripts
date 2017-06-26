@@ -2,7 +2,9 @@
 source HOSTS
 proxy_hostname=$dhcp_hostname
 export ip_proxy="$(ip -o -4 a s $(ip r s | grep default | awk '{print $5}' | head -n1) | awk '{print $4}' | cut -d \/ -f 1)"
-source gen_proxy.sh
+source shell-functions/configure-ssh.sh
+source shell-functions/installer-repo.sh
+source shell-functions/gen_proxy.sh
 
 foreman-installer \
   --no-enable-foreman \
