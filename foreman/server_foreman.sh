@@ -14,8 +14,10 @@ foreman-installer \
 	--foreman-proxy-puppet=false \
 	--enable-foreman-plugin-remote-execution
 
-systemctl stop firewalld
-systemctl disable firewalld
+get_so -s | grep CentOS && {
+        systemctl stop firewalld
+        systemctl disable firewalld
+}
 
 hammer os create --name Debian --architectures x86_64 \
 	    --family Debian --major 9 --minor 0 --release-name stretch --description "Debian 9.0.0"
