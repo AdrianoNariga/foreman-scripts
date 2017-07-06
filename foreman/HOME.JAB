@@ -1,0 +1,29 @@
+#!/bin/bash
+export foreman_domain="home.jab"
+
+export foreman_hostname=manager.$foreman_domain
+export ip_foreman=192.168.111.2
+
+export dns_hostname=dns.$foreman_domain
+export ip_dns=192.168.111.4
+export dns_iface=eth0
+export zona_name="$foreman_domain"
+export reverse="111.168.192"
+export dns_forward="189.40.198.80"
+
+export tftp_hostname=tftp.$foreman_domain
+export ip_tftp=192.168.111.5
+
+export puppet_hostname=puppet.$foreman_domain
+export ip_puppet=192.168.111.6
+
+export dhcp_hostname=dhcp.$foreman_domain
+export ip0_dhcp=192.168.111.2
+export ip1_dhcp=192.168.111.2
+export range="192.168.111.60 192.168.111.240"
+export dns="$ip_dns,189.40.198.80"
+export gateway=$ip1_dhcp
+export dhcp_iface=eth0
+
+export libvirt_host=192.168.111.252
+export libvirt_user=nariga
