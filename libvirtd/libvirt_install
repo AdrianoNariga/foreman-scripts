@@ -17,8 +17,10 @@ get_so(){
 
 case `get_so -s` in
 	Debian|Ubuntu)
-	apt -y install qemu-kvm libvirt-bin virtinst \
-		bridge-utils libguestfs-tools virt-top
+	apt -y install qemu-kvm virtinst \
+		bridge-utils libguestfs-tools virt-top \
+		libvirt-daemon libvirt-daemon-system bridge-utils \
+		libosinfo-bin libguestfs-tools virt-top
 	;;
 	CentOS)
 	yum install -y qemu-kvm libvirt virt-install \

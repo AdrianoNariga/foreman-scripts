@@ -1,29 +1,35 @@
 #!/bin/bash
-name=foreman.local
-smart_proxys="dhcp.local dns.local tftp.local puppet.local"
+foreman_name=manager
+domain="home.jab"
+smart_proxys="dhcp dns tftp puppet"
 
-ls /home/disks/$name || \
-  cp /var/lib/libvirt/images/templates/centos /home/disks/$name
+path_disks="/home/libvirt/disks/"
+path_templates="/home/libvirt/templates/"
+
+image_foreman=centos
+image_proxyes=debian9
+
+test -f $path_disks/$foreman_name.$domain || \
+  cp $path_templates/$image_foreman $path_disks/$foreman_name.$domain
 sync
 
-virsh list --all | grep $name || \
-  virt-install -n $name -r 3048 --vcpus 2 \
+virsh list --all | grep $foreman_name.$domain || \
+  virt-install -n $foreman_name.$domain -r 4096 --vcpus 2 \
     -w bridge=br0,model=virtio --noautoconsole --import \
-    --disk path=/home/disks/$name,device=disk,bus=virtio \
+    --disk path=$path_disks/$foreman_name.$domain,device=disk,bus=virtio \
     --graphics type=spice --os-type linux --os-variant rhl7.3
-
 
 for name in $smart_proxys
 do
-	ram=512
-	ls /home/disks/$name || \
-	  cp /var/lib/libvirt/images/templates/centos /home/disks/$name
+	ram=256
+	test -f $path_disks/$name.$domain || \
+	  cp $path_templates/$image_proxyes $path_disks/$name.$domain
 	sync
 	
-	virsh list --all | grep $name || \
-	  virt-install -n $name -r $ram --vcpus 1 \
+	virsh list --all | grep $name.$domain || \
+	  virt-install -n $name.$domain -r $ram --vcpus 1 \
 	    -w bridge=br0,model=virtio --noautoconsole --import \
-	    --disk path=/home/disks/$name,device=disk,bus=virtio \
+	    --disk path=$path_disks/$name.$domain,device=disk,bus=virtio \
 	    --graphics type=spice --os-type linux --os-variant rhl7.3
 done
 
@@ -36,18 +42,12 @@ prepare_instances(){
 	done
 }
 
-remove_instances(){
-	virsh list --all | grep running | awk '{print $2}' | while read i
+set_mem_cpu(){
+	for i in tftp.local dns.local dhcp.local
 	do
 		virsh destroy $i
-		virsh undefine $i --remove-all-storage
+		virsh setmaxmem $i 262144 --config
+		virsh setmem $i 262144 --config
+		virsh start $i
 	done
 }
-
-for i in tftp.local dns.local dhcp.local
-do
-	virsh destroy $i
-	virsh setmaxmem $i 262144 --config
-	virsh setmem $i 262144 --config
-	virsh start $i
-done
