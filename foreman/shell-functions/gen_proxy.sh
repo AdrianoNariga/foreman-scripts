@@ -1,10 +1,13 @@
 #!/bin/bash
 
 hostnamectl set-hostname $proxy_hostname
-setenforce permissive
-sed -i.bak "s/SELINUX=enforcing/SELINUX=permissive/g" /etc/selinux/config
-systemctl stop firewalld
-systemctl disable firewalld
+
+get_so -s | grep CentOS && {
+	setenforce permissive
+	sed -i.bak "s/SELINUX=enforcing/SELINUX=permissive/g" /etc/selinux/config
+	systemctl stop firewalld
+	systemctl disable firewalld
+}
 
 grep $foreman_hostname /etc/hosts || echo "$ip_foreman $foreman_hostname" >> /etc/hosts
 grep $proxy_hostname /etc/hosts || echo "$ip_proxy $proxy_hostname" >> /etc/hosts

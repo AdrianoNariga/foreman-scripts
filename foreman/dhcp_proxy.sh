@@ -1,5 +1,5 @@
 #!/bin/bash
-source HOSTS
+source $1
 proxy_hostname=$dhcp_hostname
 export ip_proxy="$(ip -o -4 a s $(ip r s | grep default | awk '{print $5}' | head -n1) | awk '{print $4}' | cut -d \/ -f 1)"
 source shell-functions/configure-ssh.sh
@@ -28,16 +28,15 @@ foreman-installer \
   --foreman-proxy-oauth-consumer-key="$consumer_key" \
   --foreman-proxy-oauth-consumer-secret="$consumer_secret"
 
-#net=$(ip -o -4 a s $dhcp_iface | awk '{print $4}')
-#ssh -t $ip_foreman "ip route add $net dev \$\(ip r s | grep default | awk \'\{print \$5\}\'\)"
-
 iptables -t nat -nL POSTROUTING | grep "MASQUERADE  all  --  0.0.0.0/0            0.0.0.0/0" ||
   iptables -t nat -A POSTROUTING -j MASQUERADE &&
     systemctl enable rc-local &&
     {
-      chmod +x /etc/rc.d/rc.local
-      grep "iptables -t nat -A POSTROUTING -j MASQUERADE" /etc/rc.d/rc.local ||
-      echo "iptables -t nat -A POSTROUTING -j MASQUERADE" >> /etc/rc.d/rc.local
+      rclocal_path="/etc/rc.local"
+      get_so -s | grep -q CentOS && rclocal_path="/etc/rc.d/rc.local"
+      chmod +x $rclocal_path
+      grep "iptables -t nat -A POSTROUTING -j MASQUERADE" $rclocal_path ||
+      echo "iptables -t nat -A POSTROUTING -j MASQUERADE" >> $rclocal_path
     }
 
 sysctl -w net.ipv4.ip_forward=1 &&
