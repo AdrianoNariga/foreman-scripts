@@ -1,5 +1,5 @@
 #!/bin/bash
-source HOSTS
+source $1
 proxy_hostname=$dns_hostname
 export ip_proxy="$(ip -o -4 a s $(ip r s | grep default | awk '{print $5}' | head -n1) | awk '{print $4}' | cut -d \/ -f 1)"
 
@@ -29,11 +29,16 @@ foreman-installer \
   --foreman-proxy-oauth-consumer-key="$consumer_key" \
   --foreman-proxy-oauth-consumer-secret="$consumer_secret"
 
-cat >> /var/named/dynamic/db.$zona_name << EOF
+zone_file="/var/cache/bind/zones/db.$zona_name"
+get_so -s | grep -q CentOS && zone_file="/var/named/dynamic/db.$zona_name"
+
+cat >> $zone_file << EOF
 $dhcp_hostname. IN A $ip1_dhcp
 $tftp_hostname. IN A $ip_tftp
 $puppet_hostname. IN A $ip_puppet
 $foreman_hostname. IN A $ip_foreman
 EOF
 
-systemctl restart named foreman-proxy
+dns_service="bind9"
+get_so -s | grep -q CentOS && dns_service="named"
+systemctl restart $dns_service foreman-proxy
