@@ -1,5 +1,5 @@
 #!/bin/bash
-source HOSTS
+source $1
 
 yum -y install python-requests
 foreman-installer --enable-foreman-plugin-ansible --enable-foreman-proxy-plugin-ansible

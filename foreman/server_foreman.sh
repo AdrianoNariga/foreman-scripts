@@ -20,7 +20,7 @@ hammer os create --name Debian --architectures x86_64 \
 	    --family Debian --major 9 --minor 0 --release-name stretch --description "Debian 9.0.0"
 
 hammer os create --name CoreOS --architectures x86_64 \
-	    --family CoreOS --major 1437 --minor 2.0 --description "CoreOS Beta 1437"
+	    --family Coreos --major 1437 --minor 2.0 --description "CoreOS Beta 1437"
 
 hammer template list | grep -q centos_finish ||
   hammer template create --file Template_Scripts/centos_finish --type finish --name centos_finish
