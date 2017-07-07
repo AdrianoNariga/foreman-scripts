@@ -2,7 +2,7 @@
 export foreman_domain="home.jab"
 
 export foreman_hostname=manager.$foreman_domain
-export ip_foreman=192.168.111.2
+export ip_foreman=192.168.111.3
 
 export dns_hostname=dns.$foreman_domain
 export ip_dns=192.168.111.4
