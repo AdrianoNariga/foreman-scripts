@@ -1,5 +1,5 @@
 #!/bin/bash
-source HOSTS
+source $1
 export proxy_hostname=$tftp_hostname
 export ip_proxy="$(ip -o -4 a s $(ip r s | grep default | awk '{print $5}' | head -n1) | awk '{print $4}' | cut -d \/ -f 1)"
 
@@ -8,7 +8,6 @@ source shell-functions/installer-repo.sh
 source shell-functions/gen_proxy.sh
 
 yum install -y centos-release-scl-rh centos-release-scl
-yum repolist
 yum install -y rh-ruby22-ruby tfm-rubygem-smart_proxy_dynflow_core rubygem-smart_proxy_remote_execution_ssh
 
 foreman-installer \
