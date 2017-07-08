@@ -1,0 +1,3 @@
+#!/bin/bash
+hostname
+systemctl $1 xinetd foreman-proxy
