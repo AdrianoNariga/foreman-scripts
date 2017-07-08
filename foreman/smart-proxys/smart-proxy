@@ -1,9 +1,3 @@
 #!/bin/bash
-#systemctl $1 postgresql
-#sleep 5
-#systemclt $1 httpd
-#sleep 5
 hostname
-systemctl $1 puppetserver foreman-tasks foreman-proxy
-sleep 5
-systemclt $1 puppet
+systemctl $1 isc-dhcp-server foreman-proxy
