@@ -1,3 +1,0 @@
-#!/bin/bash
-hostname
-systemctl $1 isc-dhcp-server foreman-proxy
