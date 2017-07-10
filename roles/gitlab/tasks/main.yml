@@ -1,0 +1,11 @@
+---
+- apt: name={{ item }} update_cache=yes
+  with_items:
+  - curl
+  - openssh-server
+  - ca-certificates
+  - postfix
+- shell: curl -sS https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh > /root/script.deb.sh
+- shell: bash -x /root/script.deb.sh
+- apt: name=gitlab-ce update_cache=yes
+- shell: gitlab-ctl reconfigure
