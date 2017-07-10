@@ -1,7 +1,7 @@
 mkdir -p /root/.ssh/
 
 cat << EOF >> /root/.ssh/authorized_keys
-<%= @host.params['ansible_ssh_key'].join("\n") %>
+<%= @host.params['ansible_ssh_key'] %>
 EOF
 
 chmod 0700 /root/.ssh/

@@ -6,4 +6,4 @@
 hostname
 systemctl $1 puppetserver foreman-tasks foreman-proxy
 sleep 5
-systemclt $1 puppet
+systemctl $1 puppet
