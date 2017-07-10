@@ -10,7 +10,6 @@
 echo 'root:<%= root_pass -%>' | /usr/sbin/chpasswd -e
 
 <% unless dhcp -%>
-# host and domain name need setting as these values may have come from dhcp if pxe booting
 /bin/sed -i "s/^search.*$/search <%= @host.domain %>/g" /etc/resolv.conf
 /bin/sed -i "s/.*dns-search.*/\tdns-search <%= @host.domain %>/g" /etc/network/interfaces
 <% end -%>
@@ -28,6 +27,7 @@ hostnamectl set-hostname <%= @host.shortname %>.<%= @host.domain %>
 
 apt install sudo -y
 <%= snippet('remote_execution_ssh_keys') %>
+<%= snippet('remote_ssh') %>
 
 /usr/bin/wget --no-proxy --quiet --output-document=/dev/null --no-check-certificate <%= foreman_url('built') %>
 sync

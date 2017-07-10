@@ -5,14 +5,13 @@ service network restart
 <% end -%>
 
 <%= snippet 'remote_execution_ssh_keys' %>
+<%= snippet 'remote_ssh' %>
 
 <% if @host.provision_method == 'image' && root_pass.present? -%>
 echo 'root:<%= root_pass -%>' | /usr/sbin/chpasswd -e
 <% end -%>
 
 echo <%= @host.ip %> <%= @host.certname %> >> /etc/hosts
-echo "192.168.22.12 puppet.local" >> /etc/hosts
-echo "192.168.111.90 foreman.local" >> /etc/hosts
 
 yum -y install https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
 

@@ -31,6 +31,9 @@ hammer template list | grep -q debian9_finish ||
 hammer template list | grep -q coreos_finish ||
   hammer template create --file Template_Scripts/coreos_finish --type finish --name coreos_finish
 
+hammer template list | grep -q "remote_ssh" ||
+  hammer template create --file Template_Scripts/remote_ssh.erb --type snippet --name remote_ssh
+
 test -f /usr/share/foreman/.ssh/id_rsa.pub || ssh-keygen -t rsa -f /usr/share/foreman/.ssh/id_rsa -q -P \"\"
 cat > /usr/share/foreman/.ssh/config << EOF
 Host *
