@@ -1,0 +1,11 @@
+#!/bin/bash
+proxys="192.168.111.3 192.168.111.2 192.168.111.4 192.168.111.5 192.168.111.6"
+for i in $proxys
+do
+	ssh -t $i 'bash /root/smart-proxy restart'
+done
+
+hammer proxy list | egrep -v '^-|^ID' | awk '{print $3}' | while read i
+do
+	hammer proxy refresh-features --name $i
+done
