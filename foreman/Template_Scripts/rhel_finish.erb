@@ -1,0 +1,54 @@
+<%#
+kind: finish
+name: redhat finish
+oses:
+- RedHat 7
+%>
+<% if @host.subnet.respond_to?(:dhcp_boot_mode?) -%>
+<%= snippet 'kickstart_networking_setup' %>
+service network restart
+<% end -%>
+
+<%
+  rhel_compatible = @host.operatingsystem.family == 'Redhat' && @host.operatingsystem.name != 'Fedora'
+  os_major = @host.operatingsystem.major.to_i
+  pm_set = @host.puppetmaster.empty? ? false : true
+  puppet_enabled = pm_set || @host.param_true?('force-puppet')
+  chef_enabled = @host.respond_to?(:chef_proxy) && @host.chef_proxy
+%>
+
+<% if @host.provision_method == 'image' && !root_pass.empty? -%>
+echo 'root:<%= root_pass -%>' | /usr/sbin/chpasswd -e
+<% end -%>
+
+hostnamectl set-hostname <%= @host.certname %>
+
+subscription-manager clean
+subscription-manager remove --all
+subscription-manager config --rhsm.manage_repos=0
+
+cat > /etc/yum.repos.d/redhat-local.repo << EOF
+[server-basics]
+name=Red Hat Enterprise Linux 7 Server
+baseurl=http://192.168.111.251/rhel/rhel-7-server-rpms/
+enabled=1
+gpgcheck=0
+
+[server-common]
+name=Red Hat Enterprise Linux 7 Server - RH Common
+baseurl=http://192.168.111.251/rhel/rhel-7-server-rh-common-rpms/
+enabled=1
+gpgcheck=0
+EOF
+
+echo "updating system time"
+/usr/sbin/ntpdate -sub <%= @host.params['ntp-server'] || '0.fedora.pool.ntp.org' %>
+/usr/sbin/hwclock --systohc
+
+yum -t -y -e 0 install puppet
+cat > /etc/puppet/puppet.conf << EOF
+<%= snippet 'puppet.conf' %>
+EOF
+
+/usr/bin/puppet agent --config /etc/puppet/puppet.conf -o --tags no_such_tag <%= @host.puppetmaster.blank? ? '' : "--server #{@host.puppetmaster}" %> --no-daemonize
+systemctl start puppet || exit 0
