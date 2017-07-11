@@ -21,6 +21,8 @@ case `get_so -s` in
 		bridge-utils libguestfs-tools virt-top \
 		libvirt-daemon libvirt-daemon-system bridge-utils \
 		libosinfo-bin libguestfs-tools virt-top
+
+		echo "bridge_stp off" >> /etc/network/interfaces
 	;;
 	CentOS)
 	yum install -y qemu-kvm libvirt virt-install \

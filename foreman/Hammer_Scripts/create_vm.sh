@@ -1,5 +1,12 @@
 #!/bin/bash
-# exemplo
+# compute profile	host group
+# - CPU 1		- x86_64
+# - Memory 2GB		- set root pass
+# - Network br0		- parameters
+# - Disk 30 GB		  - ansible_ssh_key
+# exemplo		  - remote_execution_create_user
+#			  - remote_execution_ssh_keys
+#			  - remote_execution_ssh_user
 # script debian test-name
 
 centos(){
