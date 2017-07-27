@@ -1,0 +1,41 @@
+<%-
+  medium_uri = @host.os.medium_uri(@host).to_s
+  hostname = medium_uri.split('/')[2]
+  
+  version = case @host.params['openstack-version']
+            when 'kilo'
+              base_url = "http://#{hostname}/pulp/repos/home-jab/production"
+            when 'newton'
+              base_url = "http://#{hostname}/pulp/repos/home-jab/update-newton"
+            end
+  
+  rhel_url = "#{base_url}/redhat-72/custom/redhat-72"
+%>
+
+cat > /etc/yum.repos.d/openstack-kilo.repo << EOF
+[openstack-kilo]
+name=OpenStack - Kilo
+baseurl=<%= base_url %>/OpenStack/custom/openstack/openstack-kilo/
+gpgcheck=0
+enabled=1
+EOF
+
+cat > /etc/yum.repos.d/redhat-7.2.repo << EOF
+[redhat-server]
+name=RedHat 7.2 - Server
+baseurl=<%= rhel_url %>/redhat-server-72/
+gpgcheck=0
+enabled=1
+
+[redhat-ha]
+name=RedHat 7.2 - HA
+baseurl=<%= rhel_url %>/redhat-ha-72/
+gpgcheck=0
+enabled=1
+
+[redhat-common]
+name=RedHat 7.2 - Common
+baseurl=<%= rhel_url %>/redhat-common-72/
+gpgcheck=0
+enabled=1
+EOF
