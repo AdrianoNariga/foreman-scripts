@@ -1,13 +1,11 @@
-<%#
-kind: finish
-name: redhat finish
-oses:
-- RedHat 7
-%>
+#!/bin/bash
 <% if @host.subnet.respond_to?(:dhcp_boot_mode?) -%>
 <%= snippet 'kickstart_networking_setup' %>
 service network restart
 <% end -%>
+
+<%= snippet 'remote_execution_ssh_keys' %>
+<%= snippet 'remote_ssh' %>
 
 <%
   rhel_compatible = @host.operatingsystem.family == 'Redhat' && @host.operatingsystem.name != 'Fedora'
@@ -30,13 +28,13 @@ subscription-manager config --rhsm.manage_repos=0
 cat > /etc/yum.repos.d/redhat-local.repo << EOF
 [server-basics]
 name=Red Hat Enterprise Linux 7 Server
-baseurl=http://192.168.111.251/rhel/rhel-7-server-rpms/
+baseurl=<%= @host.params['local_repo'] %>/rhel-7-server-rpms/
 enabled=1
 gpgcheck=0
 
 [server-common]
 name=Red Hat Enterprise Linux 7 Server - RH Common
-baseurl=http://192.168.111.251/rhel/rhel-7-server-rh-common-rpms/
+baseurl=<%= @host.params['local_repo'] %>/rhel-7-server-rh-common-rpms/
 enabled=1
 gpgcheck=0
 EOF
@@ -51,4 +49,5 @@ cat > /etc/puppet/puppet.conf << EOF
 EOF
 
 /usr/bin/puppet agent --config /etc/puppet/puppet.conf -o --tags no_such_tag <%= @host.puppetmaster.blank? ? '' : "--server #{@host.puppetmaster}" %> --no-daemonize
+sleep 5
 systemctl start puppet || exit 0
