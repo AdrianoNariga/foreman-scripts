@@ -1,0 +1,48 @@
+#!/bin/bash
+<% if @host.subnet.respond_to?(:dhcp_boot_mode?) -%>
+<%= snippet 'kickstart_networking_setup' %>
+service network restart
+<% end -%>
+
+<%= snippet 'remote_execution_ssh_keys' %>
+<%= snippet 'remote_ssh' %>
+
+<%
+  rhel_compatible = @host.operatingsystem.family == 'Redhat' && @host.operatingsystem.name != 'Fedora'
+  os_major = @host.operatingsystem.major.to_i
+  pm_set = @host.puppetmaster.empty? ? false : true
+  puppet_enabled = pm_set || @host.param_true?('force-puppet')
+  chef_enabled = @host.respond_to?(:chef_proxy) && @host.chef_proxy
+%>
+
+<% if @host.provision_method == 'image' && !root_pass.empty? -%>
+echo 'root:<%= root_pass -%>' | /usr/sbin/chpasswd -e
+<% end -%>
+
+hostnamectl set-hostname <%= @host.certname %>
+
+subscription-manager register \
+--username=<%= @host.params['rhel_user'] %> \
+--password='<%= @host.params['rhel_pass'] %>' \
+--force
+
+subscription-manager list --consumed
+subscription-manager subscribe --auto
+
+subscription-manager repos --disable=* \
+--enable=rhel-7-server-rpms \
+--enable=rhel-7-server-openstack-10-rpms \
+--enable=rhel-7-server-rh-common-rpms \
+--enable=rhel-7-server-extras-rpms \
+--enable=rhel-7-server-optional-rpms \
+--enable=rhel-ha-for-rhel-7-server-rpms \
+--enable=rhel-server-rhscl-7-rpms
+
+yum -t -y -e 0 install puppet
+cat > /etc/puppet/puppet.conf << EOF
+<%= snippet 'puppet.conf' %>
+EOF
+
+/usr/bin/puppet agent --config /etc/puppet/puppet.conf -o --tags no_such_tag <%= @host.puppetmaster.blank? ? '' : "--server #{@host.puppetmaster}" %> --no-daemonize
+sleep 5
+systemctl start puppet || exit 0
