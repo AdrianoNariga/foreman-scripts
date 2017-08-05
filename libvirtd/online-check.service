@@ -1,0 +1,10 @@
+[Unit]
+Description=Check Online access
+After=network-online.target
+
+[Service]
+User=root
+ExecStart=/usr/local/bin/online-check.sh 8.8.8.8
+
+[Install]
+WantedBy=multi-user.target
