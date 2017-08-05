@@ -27,5 +27,8 @@ chown -R foreman-proxy. /usr/share/foreman-proxy/.ssh
 chmod 0700 /usr/share/foreman-proxy/.ssh
 chmod 0600 /usr/share/foreman-proxy/.ssh/config
 
+mkdir -p /usr/share/foreman/.ansible/tmp
+chown -R foreman. /usr/share/foreman/.ansible
+
 echo "As vms criadas pelo foreman tem que ter essa chave ssh no usuario root"
 cat /usr/share/foreman-proxy/.ssh/id_rsa.pub
