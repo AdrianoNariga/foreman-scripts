@@ -17,7 +17,7 @@ class docker {
 	}
 
 	exec { 'apt-get-update':
-		command => '/usr/bin/apt-get update'
+		command => '/usr/bin/apt-get update',
 		subscribe => File['docker.list'],
 		refreshonly => true
 	}
