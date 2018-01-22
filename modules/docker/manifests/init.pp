@@ -14,7 +14,6 @@ class docker {
   		ensure => '/etc/apt/sources.list.d/docker.list',
 		content => "deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable"
 	}
-	->
 	$key = '0EBFCD88'
 	exec { 'apt-key docker':
 		path    => '/bin:/usr/bin',
