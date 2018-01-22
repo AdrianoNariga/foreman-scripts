@@ -11,19 +11,22 @@ class docker {
 		$packages = 'docker-engine'
 	}
 
+	exec { 'apt-get-update':
+		command => '/usr/bin/apt-get update'
+		subscribe => File['docker.list'],
+		refreshonly => true
+	}
+
 	file { 'docker.list':
   		path => '/etc/apt/sources.list.d/docker.list',
 		content => "deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable"
+		notify => Exec['apt-get-update']
 	}
 	->
 	exec { 'apt-key docker':
 		path    => '/bin:/usr/bin',
 		unless  => "apt-key list | grep '${key}' | grep -v expired",
 		command => "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - && apt-key fingerprint ${key}",
-	}
-	->
-	exec { 'apt-get-update':
-		command => '/usr/bin/apt-get update'
 	}
 	->	
 	package { $dependencies: ensure => present }
