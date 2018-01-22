@@ -10,14 +10,11 @@ class docker {
 		$packages = 'docker-engine'
 	}
 
-#	exec { 'apt-key docker':
-#		path    => '/bin:/usr/bin',
-#		unless  => "apt-key list | grep '${key}' | grep -v expired",
-#		command => 'add-apt-repository \
-#   		    \"deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-#   		    $(lsb_release -cs) stable\"',
-#	}
-#	->
+	file { 'docker.list':
+  		ensure => '/etc/apt/sources.list.d/docker.list',
+		content => "deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable"
+	}
+	->
 	$key = '0EBFCD88'
 	exec { 'apt-key docker':
 		path    => '/bin:/usr/bin',
