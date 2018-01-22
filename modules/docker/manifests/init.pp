@@ -20,7 +20,6 @@ class docker {
 	file { 'docker.list':
   		path => '/etc/apt/sources.list.d/docker.list',
 		content => "deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable"
-		notify => Exec['apt-get-update']
 	}
 	->
 	exec { 'apt-key docker':
