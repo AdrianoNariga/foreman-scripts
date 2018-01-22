@@ -21,6 +21,10 @@ class docker {
 		unless  => "apt-key list | grep '${key}' | grep -v expired",
 		command => "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - && apt-key fingerprint ${key}",
 	}
+	->
+	exec { 'apt-get-update':
+		command => '/usr/bin/apt-get update'
+	}
 	->	
 	package { $dependencies: ensure => present }
 	->
