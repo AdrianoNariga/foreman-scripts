@@ -14,8 +14,8 @@ class docker {
 		path    => '/bin:/usr/bin',
 		unless  => "apt-key list | grep '${key}' | grep -v expired",
 		command => 'add-apt-repository \
-   		    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-   		    $(lsb_release -cs) stable"',
+   		    \"deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   		    $(lsb_release -cs) stable\"',
 	}
 	->
 	$key = '0EBFCD88'
