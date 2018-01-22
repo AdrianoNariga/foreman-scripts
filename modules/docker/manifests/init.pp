@@ -11,15 +11,15 @@ class docker {
 		$packages = 'docker-engine'
 	}
 
+	file { 'docker.list':
+  		path => '/etc/apt/sources.list.d/docker.list',
+		content => "deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable"
+	}
+
 	exec { 'apt-get-update':
 		command => '/usr/bin/apt-get update'
 		subscribe => File['docker.list'],
 		refreshonly => true
-	}
-
-	file { 'docker.list':
-  		path => '/etc/apt/sources.list.d/docker.list',
-		content => "deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable"
 	}
 	->
 	exec { 'apt-key docker':
