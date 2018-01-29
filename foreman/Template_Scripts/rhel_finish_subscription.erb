@@ -29,7 +29,7 @@ subscription-manager register \
 subscription-manager list --consumed
 subscription-manager subscribe --auto
 
-subscription-manager repos --disable=* \
+subscription-manager repos \
 --enable=rhel-7-server-rpms \
 --enable=rhel-7-server-openstack-10-rpms \
 --enable=rhel-7-server-rh-common-rpms \
@@ -37,6 +37,10 @@ subscription-manager repos --disable=* \
 --enable=rhel-7-server-optional-rpms \
 --enable=rhel-ha-for-rhel-7-server-rpms \
 --enable=rhel-server-rhscl-7-rpms
+
+<% if @host.params['upgrade'] -%>
+yum update -y
+<% end -%>
 
 yum -t -y -e 0 install puppet
 cat > /etc/puppet/puppet.conf << EOF
