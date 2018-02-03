@@ -27,3 +27,8 @@ systemctl enable zabbix-server
 sed -i 's/# php_value date.timezone Europe\/Riga/php_value date.timezone America\/Sao_Paulo/g' /etc/httpd/conf.d/zabbix.conf
 grep "Redirect /index.html /zabbix" /etc/httpd/conf.d/zabbix.conf || echo "Redirect /index.html /zabbix" >> /etc/httpd/conf.d/zabbix.conf
 systemctl restart httpd
+
+sed -i "s/Hostname=Zabbix server/Hostname=$HOSTNAME/g" /etc/zabbix/zabbix_agentd.conf
+
+systemctl start zabbix-agent
+systemctl enable zabbix-agent
