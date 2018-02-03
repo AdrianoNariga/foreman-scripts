@@ -1,0 +1,28 @@
+#!/bin/bash
+yum -y install php-mysql php-gd php-xml php-bcmath mariadb-server php php-mbstring php-pear httpd
+yum -y install http://repo.zabbix.com/zabbix/3.4/rhel/7/x86_64/zabbix-release-3.4-1.el7.centos.noarch.rpm
+yum -y install zabbix-get zabbix-server-mysql zabbix-web-mysql zabbix-agent
+sed -i 's/;date.timezone/date.timezone = \"America\/Sao_Paulo\"/g' /etc/php.ini
+
+firewall-cmd --add-service=http --permanent
+firewall-cmd --reload
+systemctl start mariadb httpd
+systemctl enable mariadb httpd
+mysql -e "create database zabbix;"
+mysql -e "grant all privileges on zabbix.* to zabbix@'localhost' identified by 'password';"
+mysql -e "grant all privileges on zabbix.* to zabbix@'%' identified by 'password';"
+mysql -e "flush privileges;"
+cd /usr/share/doc/zabbix-server-mysql-*/
+gunzip create.sql.gz
+mysql zabbix < create.sql
+
+sed -i 's/# DBHost=localhost/DBHost=localhost/g' /etc/zabbix/zabbix_server.conf
+sed -i 's/# DBPassword=/DBPassword=password/g' /etc/zabbix/zabbix_server.conf
+setenforce permissive
+sed -i 's/SELINUX=enforcing/SELINUX=permissive/g' /etc/selinux/config
+
+systemctl start zabbix-server
+systemctl enable zabbix-server
+
+sed -i 's/# php_value date.timezone Europe\/Riga/php_value date.timezone America\/Sao_Paulo/g' /etc/httpd/conf.d/zabbix.conf
+systemctl restart httpd
