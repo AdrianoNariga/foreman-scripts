@@ -17,14 +17,13 @@ get_so(){
         shift
         done
 }
+ipaddr=$(ip -o -4 a s $(ip r s | grep default | awk '{print $5}' | head -n1) | awk '{print $4}' | cut -d \/ -f 1)
+iface=$(ip -o -4 a s|grep "$ipaddr" | awk '{print $2}')
+cid=$(ip -o -4 a s|grep "$ipaddr" | awk '{print $4}' |cut -d / -f 2)
+gw=$(ip r s | grep ^default | awk '{print $3}')
+dns=$(grep nameserver /etc/resolv.conf | head -n1 | awk '{print $2}')
 
 centos_ip(){
-	ipaddr=$(ip -o -4 a s $(ip r s | grep default | awk '{print $5}' | head -n1) | awk '{print $4}' | cut -d \/ -f 1)
-	iface=$(ip -o -4 a s|grep "$ipaddr" | awk '{print $2}')
-	cid=$(ip -o -4 a s|grep "$ipaddr" | awk '{print $4}' |cut -d / -f 2)
-	gw=$(ip r s | grep ^default | awk '{print $3}')
-	dns=$(grep nameserver /etc/resolv.conf | head -n1 | awk '{print $2}')
-
 cat > /etc/sysconfig/network-scripts/ifcfg-$iface << EOF
 BOOTPROTO=static
 IPADDR=$ipaddr
@@ -45,13 +44,13 @@ cat > /etc/network/interfaces << EOF
 auto lo
 iface lo inet loopback
 
-auto $1
-allow-hotplug $1
-iface $1 inet static
-        address $2
-        netmask $3
-        dns-nameservers 8.8.8.8 8.8.4.4
-        dns-namesearch home.jab
+auto $iface
+allow-hotplug $iface
+iface $iface inet static
+        address $ipaddr/$cid
+	gateway $gw
+        dns-nameservers $dns 8.8.4.4
+        dns-namesearch home.lab
 EOF
 }
 

@@ -1,34 +1,44 @@
 #!/bin/bash
 foreman_name=manager
-domain="home.jab"
-smart_proxys="dhcp dns tftp puppet"
+domain="home.lab"
+
+vm_so1="$foreman_name tftp puppet"
+vm_so2="dhcp dns"
+
+smart_proxys="$vm_so1 $vm_so2"
 
 path_disks="/home/libvirt/disks/"
 path_templates="/home/libvirt/templates/"
 
-image_foreman=centos
-image_proxyes=debian9
+for name in $vm_so1
+do
+	ram=256
+	cpu=1
 
-test -f $path_disks/$foreman_name.$domain || \
-  cp $path_templates/$image_foreman $path_disks/$foreman_name.$domain
-sync
+	echo $name | grep $foreman_name && ram=4092 && cpu=2
+	echo $name | grep puppet && ram=1024 && cpu=1
 
-virsh list --all | grep $foreman_name.$domain || \
-  virt-install -n $foreman_name.$domain -r 4096 --vcpus 2 \
-    -w bridge=br0,model=virtio --noautoconsole --import \
-    --disk path=$path_disks/$foreman_name.$domain,device=disk,bus=virtio \
-    --graphics type=spice --os-type linux --os-variant rhl7.3
+	test -f $path_disks/$name.$domain || \
+	  cp $path_templates/centos $path_disks/$name.$domain
+	sync
+	
+	virsh list --all | grep $name.$domain || \
+	  virt-install -n $name.$domain -r $ram --vcpus $cpu \
+	    -w network=foreman,model=virtio --noautoconsole --import \
+	    --disk path=$path_disks/$name.$domain,device=disk,bus=virtio \
+	    --graphics type=spice --os-type linux --os-variant rhl7.3
+done
 
-for name in $smart_proxys
+for name in $vm_so2
 do
 	ram=256
 	test -f $path_disks/$name.$domain || \
-	  cp $path_templates/$image_proxyes $path_disks/$name.$domain
+	  cp $path_templates/debian9 $path_disks/$name.$domain
 	sync
 	
 	virsh list --all | grep $name.$domain || \
 	  virt-install -n $name.$domain -r $ram --vcpus 1 \
-	    -w bridge=br0,model=virtio --noautoconsole --import \
+	    -w network=foreman,model=virtio --noautoconsole --import \
 	    --disk path=$path_disks/$name.$domain,device=disk,bus=virtio \
 	    --graphics type=spice --os-type linux --os-variant rhl7.3
 done

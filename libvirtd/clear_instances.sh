@@ -1,9 +1,9 @@
 #!/bin/bash
 foreman_name=manager
-domain="home.jab"
+domain="home.lab"
 smart_proxys="dhcp dns tftp puppet"
 
-virsh list --all | grep running | awk '{print $2}' | while read i
+virsh list --all | egrep 'running|shut' | awk '{print $2}' | while read i
 do
 	virsh destroy $i
 	virsh undefine $i --remove-all-storage
