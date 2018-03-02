@@ -8,8 +8,8 @@ export dns_hostname=dns.$foreman_domain
 export ip_dns=192.168.100.4
 export dns_iface=ens3
 export zona_name="$foreman_domain"
-export reverse="111.168.192"
-export dns_forward="189.40.198.80"
+export reverse="100.168.192"
+export dns_forward="8.8.8.8"
 
 export tftp_hostname=tftp.$foreman_domain
 export ip_tftp=192.168.100.5
@@ -21,9 +21,9 @@ export dhcp_hostname=dhcp.$foreman_domain
 export ip0_dhcp=192.168.100.2
 export ip1_dhcp=192.168.100.2
 export range="192.168.100.60 192.168.100.240"
-export dns="$ip_dns,189.40.198.80"
+export dns="$ip_dns,8.8.8.8"
 export gateway=$ip1_dhcp
 export dhcp_iface=ens3
 
-export libvirt_host=192.168.100.252
+export libvirt_host=192.168.100.251
 export libvirt_user=nariga

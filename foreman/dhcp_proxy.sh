@@ -26,7 +26,10 @@ foreman-installer \
   --foreman-proxy-trusted-hosts=$dhcp_hostname \
   --foreman-proxy-foreman-base-url=https://$foreman_hostname \
   --foreman-proxy-oauth-consumer-key="$consumer_key" \
-  --foreman-proxy-oauth-consumer-secret="$consumer_secret"
+  --foreman-proxy-oauth-consumer-secret="$consumer_secret" \
+  --foreman-proxy-ssl-ca /etc/puppetlabs/puppet/ssl/certs/ca.pem \
+  --foreman-proxy-ssl-cert /etc/puppetlabs/puppet/ssl/certs/$proxy_hostname.pem \
+  --foreman-proxy-ssl-key /etc/puppetlabs/puppet/ssl/private_keys/$proxy_hostname.pem
 
 iptables -t nat -nL POSTROUTING | grep "MASQUERADE  all  --  0.0.0.0/0            0.0.0.0/0" ||
   iptables -t nat -A POSTROUTING -j MASQUERADE &&

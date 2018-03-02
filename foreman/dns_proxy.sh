@@ -28,6 +28,10 @@ foreman-installer \
   --foreman-proxy-foreman-base-url=https://$foreman_hostname \
   --foreman-proxy-oauth-consumer-key="$consumer_key" \
   --foreman-proxy-oauth-consumer-secret="$consumer_secret"
+  --foreman-proxy-oauth-consumer-secret="$consumer_secret" \
+  --foreman-proxy-ssl-ca /etc/puppetlabs/puppet/ssl/certs/ca.pem \
+  --foreman-proxy-ssl-cert /etc/puppetlabs/puppet/ssl/certs/$proxy_hostname.pem \
+  --foreman-proxy-ssl-key /etc/puppetlabs/puppet/ssl/private_keys/$proxy_hostname.pem
 
 zone_file="/var/cache/bind/zones/db.$zona_name"
 get_so -s | grep -q CentOS && zone_file="/var/named/dynamic/db.$zona_name"
