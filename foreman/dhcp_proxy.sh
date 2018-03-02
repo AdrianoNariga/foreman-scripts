@@ -44,3 +44,6 @@ iptables -t nat -nL POSTROUTING | grep "MASQUERADE  all  --  0.0.0.0/0          
 
 sysctl -w net.ipv4.ip_forward=1 &&
   echo "net.ipv4.ip_forward = 1" > /etc/sysctl.d/98-ip_forward.conf
+
+source shell-functions/puppet-agent.sh
+systemctl restart puppet
