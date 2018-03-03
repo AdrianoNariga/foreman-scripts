@@ -17,7 +17,7 @@ get_so -s | grep CentOS && {
 }
 
 hammer os create --name Debian --architectures x86_64 \
-	    --family Debian --major 9 --minor 0 --release-name stretch --description "Debian 9.0.0"
+	    --family Debian --major 9 --minor 3 --release-name stretch --description "Debian 9.3.0"
 
 hammer os create --name CoreOS --architectures x86_64 \
 	    --family Coreos --major 1437 --minor 2.0 --description "CoreOS Beta 1437"
