@@ -1,3 +1,16 @@
+
+case `get_so -s` in
+	CentOS)
+		yum install -y puppet
+	;;
+	Ubuntu)
+		apt install -y puppet
+	;;
+	Debian)
+		apt install -y puppet
+	;;
+esac
+grep $puppet_hostname /etc/hosts || echo "$ip_puppet $puppet_hostname"
 cat > /etc/puppetlabs/puppet/puppet.conf << EOF
 [main]
     basemodulepath = /etc/puppetlabs/code/environments/common:/etc/puppetlabs/code/modules:/opt/puppetlabs/puppet/modules
