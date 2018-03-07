@@ -28,3 +28,4 @@ foreman-installer \
   --foreman-proxy-oauth-consumer-key="$consumer_key" \
   --foreman-proxy-oauth-consumer-secret="$consumer_secret" \
   --enable-foreman-proxy-plugin-remote-execution-ssh
+source shell-functions/puppet-agent.sh
