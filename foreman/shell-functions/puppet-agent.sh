@@ -10,7 +10,7 @@ case `get_so -s` in
 		apt install -y puppet
 	;;
 esac
-grep $puppet_hostname /etc/hosts || echo "$ip_puppet $puppet_hostname"
+grep -1 $puppet_hostname /etc/hosts || echo "$ip_puppet $puppet_hostname" >> /etc/hosts
 cat > /etc/puppetlabs/puppet/puppet.conf << EOF
 [main]
     basemodulepath = /etc/puppetlabs/code/environments/common:/etc/puppetlabs/code/modules:/opt/puppetlabs/puppet/modules
@@ -36,3 +36,6 @@ certname        = $proxy_hostname
 environment     = production
 server          = $puppet_hostname
 EOF
+
+systemctl restart puppet
+systemctl enable puppet

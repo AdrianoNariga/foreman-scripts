@@ -27,7 +27,6 @@ foreman-installer \
   --foreman-proxy-trusted-hosts=$proxy_hostname \
   --foreman-proxy-foreman-base-url=https://$foreman_hostname \
   --foreman-proxy-oauth-consumer-key="$consumer_key" \
-  --foreman-proxy-oauth-consumer-secret="$consumer_secret"
   --foreman-proxy-oauth-consumer-secret="$consumer_secret" \
   --foreman-proxy-ssl-ca /etc/puppetlabs/puppet/ssl/certs/ca.pem \
   --foreman-proxy-ssl-cert /etc/puppetlabs/puppet/ssl/certs/$proxy_hostname.pem \
@@ -46,3 +45,5 @@ EOF
 dns_service="bind9"
 get_so -s | grep -q CentOS && dns_service="named"
 systemctl restart $dns_service foreman-proxy
+
+source shell-functions/puppet-agent.sh
