@@ -1,14 +1,17 @@
 #!/bin/bash
 foreman_name=manager
-domain="home.lab"
+domain="home.jab"
 
 vm_so1="$foreman_name tftp puppet"
-vm_so2="dhcp dns"
+vm_so2="dhcp-1 dns"
 
 smart_proxys="$vm_so1 $vm_so2"
 
 path_disks="/home/libvirt/disks/"
 path_templates="/home/libvirt/templates/"
+
+virtual_rede="network=foreman"
+#virtual_rede="bridge=br0"
 
 for name in $vm_so1
 do
@@ -24,7 +27,7 @@ do
 	
 	virsh list --all | grep $name.$domain || \
 	  virt-install -n $name.$domain -r $ram --vcpus $cpu \
-	    -w network=foreman,model=virtio --noautoconsole --import \
+	    -w $virtual_rede,model=virtio --noautoconsole --import \
 	    --disk path=$path_disks/$name.$domain,device=disk,bus=virtio \
 	    --graphics type=spice --os-type linux --os-variant rhl7.3
 done
@@ -38,7 +41,7 @@ do
 	
 	virsh list --all | grep $name.$domain || \
 	  virt-install -n $name.$domain -r $ram --vcpus 1 \
-	    -w network=foreman,model=virtio --noautoconsole --import \
+	    -w $virtual_rede,model=virtio --noautoconsole --import \
 	    --disk path=$path_disks/$name.$domain,device=disk,bus=virtio \
 	    --graphics type=spice --os-type linux --os-variant rhl7.3
 done
