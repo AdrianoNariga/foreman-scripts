@@ -1,0 +1,31 @@
+## Lista vm name e tap relacionada
+virsh list | grep run | awk '{print $2}' | while read i
+do
+	echo $i $(virsh domiflist $i | grep ^tap | awk '{print $1}')
+done
+
+## Lista QOS de todas as instancias
+virsh list | grep run | awk '{print $2}' | while read i
+do
+	virsh domiftune $i $(virsh domiflist $i | grep ^tap | awk '{print $1}')
+done
+
+## Remove o QOS de todas as instacias
+virsh list | grep run | awk '{print $2}' | while read i
+do
+	virsh domiftune $i $(virsh domiflist $i | grep ^tap | awk '{print $1}') --outbound 0 --inbound 0
+done
+
+virsh help domiftune
+
+## Informacoes de rede (tap) da vm
+virsh domiflist <domain>
+
+## Informacoes de QOS
+virsh dominfo <domain>
+
+## Exibe QOS de rede
+virsh domiftune <domain> <rede-tap>
+
+## Altera QOS de rede da vm
+virsh domiftune <domain> --outbound 0 --inbound 0
