@@ -1,7 +1,7 @@
 #!/bin/bash
 foreman_server=$1
 
-echo "deb http://deb.theforeman.org/ xenial 1.15" > /etc/apt/sources.list.d/foreman.list
+echo "deb http://deb.theforeman.org/ xenial 1.16" > /etc/apt/sources.list.d/foreman.list
 apt-get -y install ca-certificates
 wget -q https://deb.theforeman.org/pubkey.gpg -O- | apt-key add -
 apt-get update && sudo apt-get install ruby-hammer-cli ruby-hammer-cli-foreman -y
