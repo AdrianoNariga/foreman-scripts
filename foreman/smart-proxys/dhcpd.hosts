@@ -1,0 +1,65 @@
+# static DHCP hosts
+host rede-ativebook.home.jab {
+      option host-name "ativebook.home.jab";
+      hardware ethernet b4:b6:76:70:46:d0;
+      fixed-address 192.168.111.81;
+}
+
+host wifi-ativebook.home.jab {
+      option host-name "ativebook.home.jab";
+      hardware ethernet 24:f5:aa:4d:01:29;
+      fixed-address 192.168.111.82;
+}
+##############################################
+host rede-vani-pc.home.jab {
+      option host-name "vani-pc.home.jab";
+      hardware ethernet 00:23:5a:7b:b9:00;
+      fixed-address 192.168.111.83;
+}
+host wifi-vani-pc.home.jab {
+      option host-name "vani-pc.home.jab";
+      hardware ethernet 74:de:2b:6e:23:70;
+      fixed-address 192.168.111.84;
+}
+#############################################
+host tv-rede.home.jab {
+      option host-name "tv-rede.home.jab";
+      hardware ethernet c4:57:6e:ab:80:ce;
+      fixed-address 192.168.111.85;
+}
+
+host tv-wifi.home.jab-wireless {
+      option host-name "tv-rede.home.jab";
+      hardware ethernet c4:57:6e:c4:db:df;
+      fixed-address 192.168.111.86;
+}
+############################################
+
+host chromecast.home.jab {
+      option host-name "chromecast.home.jab";
+      hardware ethernet a4:77:33:80:41:4e;
+      fixed-address 192.168.111.87;
+}
+
+host van-cel.home.jab {
+      option host-name "van-cel.home.jab";
+      hardware ethernet b0:e0:3c:20:e4:bd;
+      fixed-address 192.168.111.88;
+}
+
+host nag-cel.home.jab {
+      option host-name "nag-cel.home.jab";
+      hardware ethernet 00:0a:f5:3f:93:c4;
+      fixed-address 192.168.111.89;
+}
+###########################################
+host ideapad-rede.home.jab {
+      option host-name "ideapad-rede.home.jab";
+      hardware ethernet 64:1c:67:8d:a3:31;
+      fixed-address 192.168.111.250;
+}
+host ideapad-wifi.home.jab {
+      option host-name "ideapad-wifi.home.jab";
+      hardware ethernet 5c:c9:d3:99:87:34;
+      fixed-address 192.168.111.90;
+}
