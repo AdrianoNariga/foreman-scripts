@@ -25,19 +25,7 @@ subscription-manager clean
 subscription-manager remove --all
 subscription-manager config --rhsm.manage_repos=0
 
-cat > /etc/yum.repos.d/redhat-local.repo << EOF
-[server-basics]
-name=Red Hat Enterprise Linux 7 Server
-baseurl=<%= @host.params['local_repo'] %>/rhel-7-server-rpms/
-enabled=1
-gpgcheck=0
-
-[server-common]
-name=Red Hat Enterprise Linux 7 Server - RH Common
-baseurl=<%= @host.params['local_repo'] %>/rhel-7-server-rh-common-rpms/
-enabled=1
-gpgcheck=0
-EOF
+<%= snippet 'redhat_local_repo' %>
 
 echo "updating system time"
 /usr/sbin/ntpdate -sub <%= @host.params['ntp-server'] || '0.fedora.pool.ntp.org' %>
