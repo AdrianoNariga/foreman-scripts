@@ -1,0 +1,29 @@
+#!/bin/bash
+#export foreman_domain="home.lab"
+#
+#export foreman_hostname=manager.$foreman_domain
+#export ip_foreman=192.168.100.3
+
+#export dns_hostname=dns.$foreman_domain
+export ip_dns=192.168.222.254
+export dns_iface=ens225
+export zona_name="work.lab"
+export reverse="222.168.192"
+export dns_forward="8.8.8.8"
+
+#export tftp_hostname=tftp.$foreman_domain
+export ip_tftp=192.168.222.254
+
+#export puppet_hostname=puppet.$foreman_domain
+#export ip_puppet=192.168.100.6
+
+#export dhcp_hostname=dhcp.$foreman_domain
+export ip0_dhcp=192.168.222.254
+#export ip1_dhcp=192.168.100.2
+export range="192.168.222.60 192.168.222.240"
+export dns="$ip_dns,8.8.8.8"
+export gateway=192.168.222.254
+export dhcp_iface=ens225
+
+#export libvirt_host=192.168.100.251
+#export libvirt_user=nariga
