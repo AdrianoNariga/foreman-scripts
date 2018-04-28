@@ -33,3 +33,6 @@ foreman-installer --scenario katello \
 	--foreman-proxy-dns-reverse=$reverse.in-addr.arpa \
 	--foreman-proxy-dns-forwarders=$dns_forward \
 	--foreman-proxy-dns-forwarders=8.8.4.4
+
+systemctl stop firewalld
+systemctl disable firewalld
