@@ -1,5 +1,8 @@
 #!/bin/bash
 source $1
+
+hostnamectl set-hostname $foreman_hostname
+
 yum -y localinstall http://fedorapeople.org/groups/katello/releases/yum/3.6/katello/el7/x86_64/katello-repos-latest.rpm
 yum -y localinstall http://yum.theforeman.org/releases/1.17/el7/x86_64/foreman-release.rpm
 yum -y localinstall https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm

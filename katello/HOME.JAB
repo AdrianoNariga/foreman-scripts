@@ -1,4 +1,8 @@
 #!/bin/bash
+export foreman_domain="home.stc"
+
+export foreman_hostname=katello.$foreman_domain
+export ip_foreman=192.168.111.239
 
 export ip_dns=192.168.111.239
 export dns_iface=eth0
