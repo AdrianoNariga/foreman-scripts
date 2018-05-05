@@ -56,3 +56,106 @@ hammer user create \
 	--mail nariga@home.stc \
 	--login nariga \
 	--password 'VuDa22)$cld'
+
+hammer compute-resource create --provider Libvirt \
+	--name vostro \
+	--organizations home \
+	--locations stc \
+	--display-type SPICE \
+	--set-console-password false \
+	--url qemu+ssh://nariga@192.168.111.251/system
+
+hammer compute-resource create --provider Libvirt \
+	--name lenovo \
+	--organizations home \
+	--locations stc \
+	--display-type SPICE \
+	--set-console-password false \
+	--url qemu+ssh://root@192.168.111.252/system
+
+hammer os create --name Ubuntu \
+	--architectures x86_64 \
+	--family Debian \
+	--major 16 --minor 04 \
+	--release-name "xenial" \
+	--description "Ubuntu Xenial"
+
+hammer os create --name Ubuntu \
+	--architectures x86_64 \
+	--family Debian \
+	--major 18 --minor 04 \
+	--release-name "bionic" \
+	--description "Ubuntu Bionic"
+
+hammer os create --name Debian \
+	--architectures x86_64 \
+	--family Debian \
+	--major 9 --minor 4 \
+	--release-name "stretch" \
+	--description "Debian Stretch"
+
+hammer os create --name RedHat \
+	--architectures x86_64 \
+	--family Redhat \
+	--major 7 --minor 4 \
+	--description "RHEL Server 7.4"
+
+hammer os create --name CentOS \
+	--architectures x86_64 \
+	--family Redhat \
+	--major 6 --minor 9 \
+	--description "CentOS 6.9"
+
+hammer compute-resource image create \
+	--compute-resource lenovo \
+	--architecture x86_64 \
+	--name centos7 \
+	--operatingsystem "CentOS 7.4.1708" \
+	--username root --password '123' \
+	--user-data false \
+	--uuid /home/libvirt/templates/centos
+
+hammer compute-resource image create \
+	--compute-resource lenovo \
+	--architecture x86_64 \
+	--name rhel7 \
+	--operatingsystem "RHEL Server 7.4" \
+	--username root --password '123' \
+	--user-data false \
+	--uuid /home/libvirt/templates/rhel
+
+hammer compute-resource image create \
+	--compute-resource lenovo \
+	--architecture x86_64 \
+	--name centos6 \
+	--operatingsystem "CentOS 6.9" \
+	--username root --password '123' \
+	--user-data false \
+	--uuid /home/libvirt/templates/centos6
+
+hammer compute-resource image create \
+	--compute-resource lenovo \
+	--architecture x86_64 \
+	--name debian9 \
+	--operatingsystem "Debian Stretch" \
+	--username root --password '123' \
+	--user-data false \
+	--uuid /home/libvirt/templates/debian9
+
+hammer compute-resource image create \
+	--compute-resource lenovo \
+	--architecture x86_64 \
+	--name ubuntu16 \
+	--operatingsystem "Ubuntu Xenial" \
+	--username root --password '123' \
+	--user-data false \
+	--uuid /home/libvirt/templates/ubuntu
+
+hammer compute-resource image create \
+	--compute-resource lenovo \
+	--architecture x86_64 \
+	--name ubuntu18 \
+	--operatingsystem "Ubuntu Bionic" \
+	--username root --password '123' \
+	--user-data false \
+	--uuid /home/libvirt/templates/ubuntu18
