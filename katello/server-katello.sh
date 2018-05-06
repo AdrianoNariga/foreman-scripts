@@ -159,3 +159,16 @@ hammer compute-resource image create \
 	--username root --password '123' \
 	--user-data false \
 	--uuid /home/libvirt/templates/ubuntu18
+
+
+cd Templates_Scripts/snnipet/
+for i in *
+do
+	hammer template create \
+		--file $i \
+		--type snippet \
+		--organizations home \
+		--locations stc \
+		--name $(echo $i | cut -d '.' -f 1)
+done
+cd -

@@ -1,0 +1,36 @@
+<%-
+  case @host.operatingsystem.name
+  when "RedHat*"
+      base_name = core
+      base_description = 'Red Hat Enterprise Linux 7 Server'
+      base_path = 'rhel-7-server-rpms/'
+  
+      common_name = common
+      common_description = 'Red Hat Enterprise Linux 7 Server - RH Common'
+      common_path = 'rhel-7-server-rh-common-rpms/'
+  
+  when "CentOS*"
+      base_name = base
+      base_description = 'CentOS-7 - Base'
+      base_path = 'base/'
+  
+      common_name = updates
+      common_description = 'CentOS-7 - Updates'
+      common_path = 'extras/'
+  
+  end
+%>
+
+cat > /etc/yum.repos.d/<%= @host.operatingsystem.name %>.repo << EOF
+[<%= @base_name %>]
+name=<%= base_description %>
+baseurl=<%= @host.params['local_repo'] %>/<%= base_path %>
+enabled=1
+gpgcheck=0
+
+[<%= common_name %>]
+name=<%= common_description %>
+baseurl=<%= @host.params['local_repo'] %>/<%= common_path %>
+enabled=1
+gpgcheck=0
+EOF

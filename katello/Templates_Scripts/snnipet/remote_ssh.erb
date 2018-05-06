@@ -1,0 +1,11 @@
+mkdir -p /root/.ssh/
+
+cat << EOF >> /root/.ssh/authorized_keys
+<%= @host.params['ansible_ssh_key'] %>
+EOF
+
+chmod 0700 /root/.ssh/
+chmod 0600 /root/.ssh/authorized_keys
+chown -R root. /root/.ssh/
+
+command -v restorecon && restorecon -RvF /root/.ssh/ || true

@@ -1,0 +1,47 @@
+#!/bin/bash
+<% if @host.subnet.respond_to?(:dhcp_boot_mode?) -%>
+<%= snippet 'kickstart_networking_setup' %>
+service network restart
+<% end -%>
+
+<%= snippet 'remote_execution_ssh_keys' %>
+<%= snippet 'remote_ssh' %>
+
+<% if @host.provision_method == 'image' && root_pass.present? -%>
+echo 'root:<%= root_pass -%>' | /usr/sbin/chpasswd -e
+<% end -%>
+
+echo <%= @host.ip %> <%= @host.certname %> >> /etc/hosts
+
+yum -y install https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
+
+yum install -y puppet
+cat > /etc/puppetlabs/puppet/puppet.conf << EOF
+[main]
+vardir = /var/lib/puppet
+logdir = /var/log/puppet
+rundir = /var/run/puppet
+ssldir = \$vardir/ssl
+
+[agent]
+pluginsync      = true
+report          = true
+ignoreschedules = true
+<%- if @host.puppet_ca_server.strip -%>
+ca_server       = <%= @host.puppet_ca_server %>
+<%- end -%>
+certname        = <%= @host.certname %>
+environment     = <%= @host.environment %>
+server          = <%= @host.puppetmaster %>
+
+EOF
+
+export FACTER_is_installer=true
+/opt/puppetlabs/bin/puppet agent --config /etc/puppetlabs/puppet/puppet.conf --onetime <%= @host.param_true?('run-puppet-in-installer') ? '' : '--tags no_such_tag' %> <%= @host.puppetmaster.blank? ? '' : "--server #{@host.puppetmaster}" %> --no-daemonize
+
+sync
+sleep 5
+/usr/bin/systemctl enable puppet
+/usr/bin/systemctl start puppet
+
+exit 0
