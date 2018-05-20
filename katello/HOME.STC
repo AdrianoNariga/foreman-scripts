@@ -8,13 +8,13 @@ export ip_dns=192.168.111.239
 export dns_iface=eth0
 export zona_name="home.stc"
 export reverse="111.168.192"
-export dns_forward="8.8.8.8"
+export dns_forward="200.204.0.10"
 
 export ip_tftp=192.168.111.239
 
 export ip0_dhcp=192.168.111.239
 export range="192.168.111.200 192.168.111.230"
-export dns="$ip_dns,8.8.8.8"
+export dns="$ip_dns,200.204.0.138"
 export gateway=192.168.111.1
 export dhcp_iface=eth0
 
