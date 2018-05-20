@@ -8,7 +8,7 @@ do
 	        --operatingsystem "CentOS 7.5.1804" \
 	        --username root --password '123' \
 	        --user-data false \
-	        --uuid /home/libvirt/templates/centos
+	        --uuid /home/libvirt/templates/centos7
 	
 	hammer compute-resource image create \
 	        --compute-resource $i \
