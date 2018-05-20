@@ -44,7 +44,7 @@ do
 	        --operatingsystem "Ubuntu Xenial" \
 	        --username root --password '123' \
 	        --user-data false \
-	        --uuid /home/libvirt/templates/ubuntu
+	        --uuid /home/libvirt/templates/ubuntu16
 	
 	hammer compute-resource image create \
 	        --compute-resource $i \

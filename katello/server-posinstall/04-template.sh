@@ -48,6 +48,13 @@ do
         hammer os set-default-template --config-template-id $i --id $(hammer os list | grep "Ubuntu Xenial" | awk '{print $1}')
 done
 
+echo "configurando ubuntu bionic"
+for i in $(hammer template list | grep Kickstart | egrep -v 'finish|Atomic' | awk '{print $1}')
+do
+        hammer template add-operatingsystem --id $i --operatingsystem-id $(hammer os list | grep "Ubuntu Bionic" | awk '{print $1}')
+        hammer os set-default-template --config-template-id $i --id $(hammer os list | grep "Ubuntu Bionic" | awk '{print $1}')
+done
+
 echo "configurando debian stretch"
 for i in $(hammer template list | grep Kickstart | egrep -v 'finish|Atomic' | awk '{print $1}')
 do
