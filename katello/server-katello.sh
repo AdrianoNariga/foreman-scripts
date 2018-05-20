@@ -34,5 +34,8 @@ foreman-installer --scenario katello \
 	--foreman-proxy-dns-forwarders=$dns_forward \
 	--foreman-proxy-dns-forwarders=8.8.4.4
 
+cp -n server-posinstall/dhcpd.hosts /etc/dhcp/
+
 systemctl stop firewalld
 systemctl disable firewalld
+systemctl restart dhcpd named foreman-proxy
