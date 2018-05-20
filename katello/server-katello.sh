@@ -39,3 +39,8 @@ cp -n server-posinstall/dhcpd.hosts /etc/dhcp/
 systemctl stop firewalld
 systemctl disable firewalld
 systemctl restart dhcpd named foreman-proxy
+
+hammer proxy list | grep 9090 | awk '{print $1}' | while read i
+do
+	hammer proxy refresh-features --id $i
+done
