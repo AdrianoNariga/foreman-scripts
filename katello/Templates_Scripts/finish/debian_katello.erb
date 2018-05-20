@@ -16,8 +16,6 @@ echo 'root:<%= root_pass -%>' | /usr/sbin/chpasswd -e
 
 /bin/sed -i "s/^<%= @host.ip %>.*/<%= @host.ip %>\t<%= @host.shortname %>.<%= @host.domain %>\t<%= @host.shortname %>/g" /etc/hosts
 
-echo "192.168.22.12 puppet.local" >> /etc/hosts
-echo "192.168.111.90 foreman.local" >> /etc/hosts
 /bin/echo <%= @host.shortname %>.<%= @host.domain %> > /etc/hostname
 
 hostnamectl set-hostname <%= @host.shortname %>.<%= @host.domain %>
@@ -25,12 +23,17 @@ hostnamectl set-hostname <%= @host.shortname %>.<%= @host.domain %>
 <%= snippet 'puppet_setup' %>
 <%= snippet 'preseed_networking_setup' %>
 
-<%= snippet('remote_execution_ssh_keys') %>
+apt install sudo -y
+<%= snippet('remote_execution_ssh_keys_nariga') %>
 <%= snippet('remote_ssh') %>
 
 /usr/bin/wget --no-proxy --quiet --output-document=/dev/null --no-check-certificate <%= foreman_url('built') %>
 sync
 sleep 5
-/bin/systemctl enable puppet
-/bin/systemctl start puppet
+puppet resource service puppet enable=true
+puppet resource service puppet ensure=running
+
+<% if host_param_true?('upgrade') -%>
+apt upgrade -y
+<% end -%>
 exit 0

@@ -1,0 +1,55 @@
+<% if @host.subnet.respond_to?(:dhcp_boot_mode?) -%>
+<%= snippet 'kickstart_networking_setup' %>
+service network restart
+<% end -%>
+
+<%= snippet "subscription_manager_registration" %>
+
+<% if @host.provision_method == 'image' && root_pass.present? -%>
+echo 'root:<%= root_pass -%>' | /usr/sbin/chpasswd -e
+<% end -%>
+
+<%= snippet('remote_execution_ssh_keys_nariga') %>
+<%= snippet 'remote_ssh' %>
+
+yum -y install https://yum.puppetlabs.com/puppetlabs-release-pc1-el-<%= @host.operatingsystem.major.to_i %>.noarch.rpm
+
+yum install puppet ntpdate -y
+/usr/sbin/ntpdate -sub <%= host_param('ntp-server') || '0.fedora.pool.ntp.org' %>
+/usr/sbin/hwclock --systohc
+
+cat > /etc/puppetlabs/puppet/puppet.conf << EOF
+[main]
+vardir = /var/lib/puppet
+logdir = /var/log/puppet
+rundir = /var/run/puppet
+ssldir = \$vardir/ssl
+
+[agent]
+pluginsync      = true
+report          = true
+ignoreschedules = true
+<%- if @host.puppet_ca_server.strip -%>
+ca_server       = <%= @host.puppet_ca_server %>
+<%- end -%>
+certname        = <%= @host.certname %>
+environment     = <%= @host.environment %>
+server          = <%= @host.puppetmaster %>
+EOF
+
+export FACTER_is_installer=true
+/opt/puppetlabs/bin/puppet agent \
+	--config /etc/puppetlabs/puppet/puppet.conf \
+	--onetime <%= host_param_true?('run-puppet-in-installer') ? '' : '--tags no_such_tag' %> <%= @host.puppetmaster.blank? ? '' : "--server #{@host.puppetmaster}" %> \
+	--no-daemonize
+
+sleep 5
+
+/opt/puppetlabs/bin/puppet resource service puppet enable=true
+/opt/puppetlabs/bin/puppet resource service puppet ensure=running
+
+<% if host_param_true?('upgrade') -%>
+yum update -y
+<% end -%>
+
+exit 0
