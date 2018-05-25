@@ -24,13 +24,13 @@
 cat > /etc/yum.repos.d/<%= @host.operatingsystem.name %>.repo << EOF
 [<%= @base_name %>]
 name=<%= base_description %>
-baseurl=<%= @host.params['local_repo'] %>/<%= base_path %>
+baseurl=<%= host_param('local_repo') %>/<%= base_path %>
 enabled=1
 gpgcheck=0
 
 [<%= common_name %>]
 name=<%= common_description %>
-baseurl=<%= @host.params['local_repo'] %>/<%= common_path %>
+baseurl=<%= host_param('local_repo') %>/<%= common_path %>
 enabled=1
 gpgcheck=0
 EOF
