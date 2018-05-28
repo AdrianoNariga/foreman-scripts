@@ -43,7 +43,7 @@ EOF
 
 export FACTER_is_installer=true
 puppet agent \
-	--config /etc/puppetlabs/puppet/puppet.conf \
+	--config /etc/puppet/puppet.conf \
 	--onetime <%= host_param_true?('run-puppet-in-installer') ? '' : '--tags no_such_tag' %> <%= @host.puppetmaster.blank? ? '' : "--server #{@host.puppetmaster}" %> \
 	--no-daemonize
 
