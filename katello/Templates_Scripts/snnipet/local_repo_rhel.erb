@@ -1,13 +1,13 @@
 cat > /etc/yum.repos.d/<%= @host.operatingsystem.name %>.repo << EOF
 [core]
 name=Red Hat Enterprise Linux 7 Server
-baseurl=<%= host_param('local_repo') %>/rhel-7-server-rpms/
+baseurl=<%= host_param('local_repo') %>/redhat-basics/
 enabled=1
 gpgcheck=0
 
 [common]
 name=Red Hat Enterprise Linux 7 Server - RH Common
-baseurl=<%= host_param('local_repo') %>/rhel-7-server-rh-common-rpms/
+baseurl=<%= host_param('local_repo') %>/redhat-common/
 enabled=1
 gpgcheck=0
 EOF
