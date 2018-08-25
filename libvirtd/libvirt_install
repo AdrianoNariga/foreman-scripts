@@ -22,8 +22,15 @@ case `get_so -s` in
 		libvirt-daemon libvirt-daemon-system bridge-utils \
 		libosinfo-bin libguestfs-tools virt-top
 
+	#### habilitando repasse bridge ####
 	echo "bridge_stp off" >> /etc/network/interfaces
+
+	#### habilitando passthrough de CPU ###
 	echo 'options kvm_intel nested=1' >> /etc/modprobe.d/qemu-system-x86.conf
+
+	#### habilitando passthrough de GPU ###
+	echo "GRUB_CMDLINE_LINUX_DEFAULT=\"intel_iommu=on\"" >> /etc/default/grub
+	update-grub2
 	;;
 	CentOS)
 	yum install -y qemu-kvm libvirt virt-install \
@@ -35,9 +42,15 @@ case `get_so -s` in
 	sed -i.bak 's/#unix_sock_group = "libvirt"/unix_sock_group = "libvirt"/g' /etc/libvirt/libvirtd.conf
 	sed -i.bak 's/#unix_sock_rw_perms = "0770"/unix_sock_rw_perms = "0770"/g' /etc/libvirt/libvirtd.conf
 	sed -i.bak 's/#auth_unix_rw = "none"/auth_unix_rw = "none"/g' /etc/libvirt/libvirtd.conf
+	
+	#### habilitando passthrough de CPU ###
 	echo 'options kvm_intel nested=1' >> /etc/modprobe.d/kvm-nested.conf
 	modprobe -r kvm_intel
 	modprobe kvm_intel
+
+	#### habilitando passthrough de GPU ###
+	echo "GRUB_CMDLINE_LINUX_DEFAULT=\"intel_iommu=on\"" >> /etc/default/grub
+	grub2-mkconfig -o /boot/grub2/grub.cfg
 
 	systemctl enable libvirtd
 	systemctl restart libvirtd
