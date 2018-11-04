@@ -8,7 +8,7 @@ export ip_dns=192.168.111.239
 export dns_iface=eth0
 export zona_name="home.stc"
 export reverse="111.168.192"
-export dns_forward="200.204.0.10"
+export dns_forward="1.0.0.1"
 
 export ip_tftp=192.168.111.239
 
