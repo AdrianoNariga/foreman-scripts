@@ -14,7 +14,7 @@ export ip_tftp=192.168.111.239
 
 export ip0_dhcp=192.168.111.239
 export range="192.168.111.200 192.168.111.230"
-export dns="$ip_dns,200.204.0.138"
+export dns="$ip_dns,208.67.222.220"
 export gateway=192.168.111.1
 export dhcp_iface=eth0
 
