@@ -41,3 +41,13 @@ hammer proxy list | grep 9090 | awk '{print $1}' | while read i
 do
 	hammer proxy refresh-features --id $i
 done
+
+test -f /usr/share/foreman/.ssh/id_rsa.pub || ssh-keygen -t rsa -f /usr/share/foreman/.ssh/id_rsa -q -P \"\"
+cat > /usr/share/foreman/.ssh/config << EOF
+Host *
+   StrictHostKeyChecking no
+   UserKnownHostsFile=/dev/null
+EOF
+chown -R foreman. /usr/share/foreman/.ssh
+chmod 0700 /usr/share/foreman/.ssh
+chmod 0600 /usr/share/foreman/.ssh/config

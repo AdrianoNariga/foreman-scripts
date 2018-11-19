@@ -5,7 +5,7 @@ do
 	        --compute-resource $i \
 	        --architecture x86_64 \
 	        --name centos7 \
-	        --operatingsystem "CentOS 7.5.1804" \
+	        --operatingsystem "CentOS 7.6" \
 	        --username root --password '123' \
 	        --user-data false \
 	        --uuid /home/libvirt/templates/centos7
@@ -14,16 +14,16 @@ do
 	        --compute-resource $i \
 	        --architecture x86_64 \
 	        --name rhel7 \
-	        --operatingsystem "RHEL Server 7.4" \
+	        --operatingsystem "RedHat 7.6" \
 	        --username root --password '123' \
 	        --user-data false \
-	        --uuid /home/libvirt/templates/rhel
+	        --uuid /home/libvirt/templates/rhel-7.6
 	
 	hammer compute-resource image create \
 	        --compute-resource $i \
 	        --architecture x86_64 \
 	        --name centos6 \
-	        --operatingsystem "CentOS 6.9" \
+	        --operatingsystem "CentOS 6.10" \
 	        --username root --password '123' \
 	        --user-data false \
 	        --uuid /home/libvirt/templates/centos6

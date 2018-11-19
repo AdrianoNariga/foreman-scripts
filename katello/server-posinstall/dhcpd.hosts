@@ -1,13 +1,13 @@
 # static DHCP hosts
 host rede-ativebook.home.jab {
       option host-name "ativebook.home.jab";
-      hardware ethernet b4:b6:76:70:46:d0;
+      hardware ethernet 24:f5:aa:4d:01:29;
       fixed-address 192.168.111.81;
 }
 
 host wifi-ativebook.home.jab {
       option host-name "ativebook.home.jab";
-      hardware ethernet 24:f5:aa:4d:01:29;
+      hardware ethernet b4:b6:76:70:46:d0;
       fixed-address 192.168.111.82;
 }
 ##############################################
@@ -56,11 +56,11 @@ host nag-cel.home.jab {
 
 host ideapad-rede.home.jab {
       option host-name "ideapad.home.jab";
-      hardware ethernet 00:0a:f5:3f:93:c4;
+      hardware ethernet 64:1c:67:8d:a3:31;
       fixed-address 192.168.111.250;
 }
 host ideapad-wifi.home.jab {
       option host-name "ideapad.home.jab";
-      hardware ethernet 00:0a:f5:3f:93:c4;
+      hardware ethernet 5c:c9:d3:99:87:34;
       fixed-address 192.168.111.90;
 }
