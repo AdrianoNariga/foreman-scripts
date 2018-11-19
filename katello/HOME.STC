@@ -1,20 +1,20 @@
 #!/bin/bash
 export foreman_domain="home.stc"
 
-export foreman_hostname=katello.$foreman_domain
-export ip_foreman=192.168.111.239
+export foreman_hostname=manager.$foreman_domain
+export ip_foreman=192.168.111.2
 
-export ip_dns=192.168.111.239
+export ip_dns=192.168.111.2
 export dns_iface=eth0
 export zona_name="home.stc"
 export reverse="111.168.192"
-export dns_forward="200.204.0.10"
+export dns_forward="1.0.0.1"
 
-export ip_tftp=192.168.111.239
+export ip_tftp=192.168.111.2
 
-export ip0_dhcp=192.168.111.239
+export ip0_dhcp=192.168.111.2
 export range="192.168.111.200 192.168.111.230"
-export dns="$ip_dns,200.204.0.138"
+export dns="$ip_dns,208.67.222.220"
 export gateway=192.168.111.1
 export dhcp_iface=eth0
 
