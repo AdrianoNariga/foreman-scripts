@@ -1,3 +1,5 @@
+#hostnamectl set-hostname <%= @host.certname %>
+
 <% if @host.subnet.respond_to?(:dhcp_boot_mode?) -%>
 <%= snippet 'kickstart_networking_setup' %>
 service network restart

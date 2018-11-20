@@ -18,7 +18,7 @@ for i in *
 do
 	echo $i
 	echo
-        hammer template create \
+        hammer template update \
                 --file $i \
                 --type finish \
                 --organizations home \
