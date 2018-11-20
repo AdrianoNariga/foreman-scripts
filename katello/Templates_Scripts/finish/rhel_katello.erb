@@ -19,6 +19,7 @@ subscription-manager remove --all
 subscription-manager config --rhsm.manage_repos=0
 
 <%= snippet 'local_repo_rhel' %>
+<%= snippet "subscription_rhel" %>
 
 yum install puppet ntpdate -y
 ntpdate -sub <%= host_param('ntp-server') || '0.fedora.pool.ntp.org' %>

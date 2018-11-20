@@ -3,12 +3,12 @@ source $1
 
 hostnamectl set-hostname $foreman_hostname
 
-yum -y localinstall http://fedorapeople.org/groups/katello/releases/yum/3.8/katello/el7/x86_64/katello-repos-latest.rpm
-yum -y localinstall http://yum.theforeman.org/releases/1.19/el7/x86_64/foreman-release.rpm
+yum -y localinstall http://fedorapeople.org/groups/katello/releases/yum/3.9/katello/el7/x86_64/katello-repos-latest.rpm
+yum -y localinstall http://yum.theforeman.org/releases/1.20/el7/x86_64/foreman-release.rpm
 yum -y localinstall https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
 yum -y localinstall http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 yum -y install foreman-release-scl python-django
-yum -y install katello yum-utils device-mapper-persistent-data lvm2
+yum --nogpgcheck -y install katello yum-utils device-mapper-persistent-data lvm2
 
 foreman-installer --scenario katello \
 	--enable-foreman-compute-libvirt \

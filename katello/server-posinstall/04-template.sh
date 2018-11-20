@@ -9,6 +9,12 @@ do
                 --type snippet \
                 --organizations home \
                 --locations stc \
+                --name $(echo $i | cut -d '.' -f 1) || \
+        hammer template update \
+                --file $i \
+                --type snippet \
+                --organizations home \
+                --locations stc \
                 --name $(echo $i | cut -d '.' -f 1)
 done
 cd -
@@ -18,6 +24,12 @@ for i in *
 do
 	echo $i
 	echo
+        hammer template create \
+                --file $i \
+                --type finish \
+                --organizations home \
+                --locations stc \
+                --name $(echo $i | cut -d '.' -f 1) || \
         hammer template update \
                 --file $i \
                 --type finish \

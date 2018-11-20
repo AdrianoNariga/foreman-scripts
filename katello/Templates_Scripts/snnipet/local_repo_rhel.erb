@@ -1,3 +1,4 @@
+<% if host_param_true?('enable_local_repo') %>
 cat > /etc/yum.repos.d/<%= @host.operatingsystem.name %>.repo << EOF
 [core]
 name=Red Hat Enterprise Linux 7 Server
@@ -11,3 +12,4 @@ baseurl=<%= host_param('local_repo') %>/rhel-7-server-rh-common-rpms/
 enabled=1
 gpgcheck=0
 EOF
+<% end -%>

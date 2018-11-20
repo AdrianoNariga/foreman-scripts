@@ -1,0 +1,21 @@
+<% if host_param_true?('enable_rhel_register') %>
+subscription-manager register \
+--username=<%= host_param('rhel_user') %> \
+--password='<%= host_param('rhel_pass') %>' \
+--force
+
+subscription-manager config --rhsm.manage_repos=1
+
+subscription-manager list --consumed
+subscription-manager subscribe --auto
+
+subscription-manager repos --disable=* \
+--enable=rhel-7-server-rpms \
+--enable=rhel-7-server-openstack-10-rpms \
+--enable=rhel-7-server-openstack-11-rpms \
+--enable=rhel-7-server-rh-common-rpms \
+--enable=rhel-7-server-extras-rpms \
+--enable=rhel-7-server-optional-rpms \
+--enable=rhel-ha-for-rhel-7-server-rpms \
+--enable=rhel-server-rhscl-7-rpms
+<% end -%>
