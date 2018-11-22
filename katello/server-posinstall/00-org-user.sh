@@ -1,4 +1,5 @@
 #!/bin/bash
+read narigaPass
 hammer organization create --name home
 hammer location create --name stc
 hammer location add-domain --domain home.stc --name stc
@@ -17,4 +18,4 @@ hammer user create \
         --lastname Adriano \
         --mail nariga@home.stc \
         --login nariga \
-        --password 'VuDa22)$cld'
+        --password '${narigaPass}'
