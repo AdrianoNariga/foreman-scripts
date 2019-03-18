@@ -3,9 +3,9 @@ source shell-functions/determine_so
 
 case `get_so -s` in
 	CentOS)
-		yum -y install https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
+		yum -y install https://yum.puppetlabs.com/puppet5/puppet5-release-el-7.noarch.rpm
 		yum -y install http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-		yum -y install https://yum.theforeman.org/releases/1.16/el7/x86_64/foreman-release.rpm
+		yum -y install https://yum.theforeman.org/releases/1.20/el7/x86_64/foreman-release.rpm
 		yum install -y dos2unix foreman-installer
 	;;
 	Ubuntu)
