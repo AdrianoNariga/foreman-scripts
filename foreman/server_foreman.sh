@@ -6,6 +6,8 @@ grep $foreman_hostname /etc/hosts || echo "$ip_foreman $foreman_hostname" >> /et
 source shell-functions/installer-repo.sh
 
 foreman-installer \
+	--foreman-organizations-enabled=false \
+	--foreman-locations-enabled=false \
 	--enable-foreman-compute-libvirt \
 	--foreman-proxy-tftp=false \
 	--foreman-proxy-puppet=false \
