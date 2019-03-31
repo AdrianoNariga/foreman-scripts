@@ -18,8 +18,8 @@ export puppet_hostname=puppet.$foreman_domain
 export ip_puppet=192.168.111.6
 
 export dhcp_hostname=dhcp.$foreman_domain
-export ip0_dhcp=192.168.111.2
-export ip1_dhcp=192.168.111.2
+export ip0_dhcp=192.168.111.8
+export ip1_dhcp=192.168.111.8
 export range="192.168.111.60 192.168.111.240"
 export dns="$ip_dns,208.67.222.220"
 export gateway=192.168.111.1
