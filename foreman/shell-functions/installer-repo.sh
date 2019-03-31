@@ -3,10 +3,6 @@ source shell-functions/determine_so
 
 case `get_so -s` in
 	CentOS)
-		yum erase puppet-agent puppetlabs-release-pc1 -y
-		rm -rf /etc/puppetlabs/
-		rm -rf /var/lib/puppet/
-		rm -rf /var/log/puppet/
 		yum -y install https://yum.puppetlabs.com/puppet5/puppet5-release-el-7.noarch.rpm
 		yum -y install http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 		yum -y install https://yum.theforeman.org/releases/1.21/el7/x86_64/foreman-release.rpm
