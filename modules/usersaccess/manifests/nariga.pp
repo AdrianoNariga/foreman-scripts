@@ -32,15 +32,6 @@ class usersaccess::nariga {
 		require => File["/home/$usuario"]
 	}
 
-	file{ "/home/$usuario/.screenrc":
-		ensure => present,
-		owner => $usuario,
-		source => 'puppet:///modules/usersaccess/screenrc',
-		group => 'users',
-		mode => '0644',
-		require => File["/home/$usuario"]
-	}
-
 	file{ "/home/$usuario/.ssh/authorized_keys":
 		ensure => present,
 		content => $key_ssh,
